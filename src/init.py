@@ -8,7 +8,10 @@ from flask_pyoidc.provider_configuration import ProviderConfiguration, ClientMet
 
 
 app = flask.Flask(__name__)
-app.config.from_pyfile(os.path.join(os.getcwd(), "config.py"))
+try:
+    app.config.from_pyfile(os.path.join(os.getcwd(), "config.py"))
+except:
+    app.config.from_pyfile("config.py")
 
 # time setup for the server side time
 eastern = pytz.timezone('America/New_York')
