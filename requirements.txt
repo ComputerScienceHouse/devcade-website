@@ -31,3 +31,4 @@ SQLAlchemy==1.4.42
 typing_extensions==4.4.0
 urllib3==1.26.12
 Werkzeug==2.2.2
+psycopg2-binary==2.9.3
