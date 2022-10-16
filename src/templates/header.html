@@ -2,18 +2,38 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/devcade.css') }}">
-    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/devcade.css') }}"
+    />
+    <link
+      rel="shortcut icon"
+      href="{{ url_for('static', filename='favicon.ico') }}"
+    />
     <title>Devcade</title>
   </head>
   <body>
-    <div id="nav"><h1>DEVCADE</h1></div>
-    <div id="content">
-        {% block content %}{% endblock %}
+    <div id="header">
+      <div id="title"><h1>Devacde</h1></div>
+      <div id="nav">
+        <div class="item"><a href="/">Home</a></div>
+        <div class="item"><a href="/about">About</a></div>
+        <div class="item"><a href="/catalog">Catalog</a></div>
+        <div class="item"><a href="upload">Upload</a></div>
+        <div class="item" id="account">
+          <div>
+              <img src="{{ user.img }}" alt="{{ user.username }}" id="pfp" />
+            <h3>{{ user.name }}</h3>
+          </div>
+        </div>
+      </div>
     </div>
+    <img id="bg" src="{% block bgSRC %}./static/images/neonBG.jpg{% endblock %}" alt="background" />
+    <!-- <div id="spaceholder"><h1>L</h1></div> -->
+    <div id="content">{% block content %}{% endblock %}</div>
   </body>
 </html>
 

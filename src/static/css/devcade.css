@@ -1,17 +1,56 @@
-/* 
-    I put random stuff here for now
-    because I can't find anything that
-    looks half decent
-*/
+/* https://stackoverflow.com/questions/12989916/using-scss-with-flask */
 
-body{
-    background-color:blanchedalmond;
+body {
+    margin: 0px;
 }
-header{
-    text-align: center;
-    background-color: khaki;
+
+h3 {
+    margin: 0px;
 }
-#description{
-    background-color: blueviolet;
-    color: wheat;
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+#header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    background-color: rgba(55, 55, 55, 0.5);
+}
+
+#title>h1 {
+    color: aliceblue;
+}
+
+#nav {
+    display: flex;
+    align-items: center;
+    color: white;
+}
+
+#nav>.item {
+    margin: 0px 1em;
+    height: 2em;
+}
+
+#account>div {
+    display: flex;
+}
+
+#pfp {
+    width: 40px;
+    border-radius: 50%;
+    margin-right: .3rem;
+    display: inline;
+    vertical-align: middle;
+}
+
+#bg {
+    width: 100%;
+    height: min(100vh, 400px);
 }
