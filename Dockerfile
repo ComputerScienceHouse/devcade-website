@@ -12,4 +12,4 @@ COPY . .
 
 WORKDIR /app/src
 
-CMD [ "gunicorn", "-k" , "geventwebsocket.gunicorn.workers.GeventWebSocketWorker", "--bind", "0.0.0.0:8080", "application:app"]
+CMD [ "gunicorn", "--bind", "0.0.0.0:8080", "app:app"]
