@@ -27,4 +27,4 @@ def uploadpage():
     return flask.render_template('upload.html', user=guest)
 
 if __name__ == '__main__':
-    app.run()
+    app.run(host='localhost')

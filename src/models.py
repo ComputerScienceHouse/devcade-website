@@ -10,7 +10,7 @@ class User(db.Model):
     picture = db.Column(db.String, nullable=False)
     admin = db.Column(db.Boolean, nullable=False)
 
-    def init(self, uid, firstname, lastname, picture, admin):
+    def __init__(self, uid, firstname, lastname, picture, admin):
         self.id = uid
         self.firstname = firstname
         self.lastname = lastname
@@ -41,3 +41,4 @@ class User(db.Model):
     def is_anonymous():
         return False
 
+db.create_all()
