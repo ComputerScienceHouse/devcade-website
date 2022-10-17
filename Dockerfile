@@ -5,7 +5,6 @@ WORKDIR /app
 ADD ./src /app
 COPY ./requirements.txt requirements.txt
 RUN apt-get -yq update && \
-    apt-get -yq install libsasl2-dev libldap2-dev libssl-dev gcc g++ make && \
     pip install --no-cache-dir -r requirements.txt
 
 COPY . .
