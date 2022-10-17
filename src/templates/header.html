@@ -17,7 +17,7 @@
   </head>
   <body>
     <div id="header">
-      <div id="title"><h1>Devacde</h1></div>
+      <a href='/' id="title"><h1>Devacde</h1></a>
       <div id="nav">
         <div class="item"><a href="/">Home</a></div>
         <div class="item"><a href="/about">About</a></div>
@@ -48,7 +48,7 @@
           </div>
           <div class="dropdown-menu">
             <!-- <div class="dropdown-divider"></div> -->
-            <a class="dropdown-item" href="/login">Log in</a>
+            <a class="dropdown-item" href="/login?goto={{ request.endpoint }}">Log in</a>
           </div>
         </div>
         {% endif %}

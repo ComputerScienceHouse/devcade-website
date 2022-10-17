@@ -69,7 +69,11 @@ def csh_auth(auth_dict=None):
         db.session.add(user)
     db.session.commit()
     login_user(user)
-    return flask.redirect('/')
+    goto = flask.request.args.get('goto')
+    if goto == None:
+        goto = 'homepage'
+    goto = flask.url_for(goto)
+    return flask.redirect(goto)
 
 
 with app.app_context():

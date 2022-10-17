@@ -23,10 +23,6 @@ a {
     background-color: rgba(55, 55, 55, 0.5);
 }
 
-#title>h1 {
-    color: aliceblue;
-}
-
 #nav {
     display: flex;
     align-items: center;
