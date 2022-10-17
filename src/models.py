@@ -1,8 +1,8 @@
 from init import db
 
 
-class User(db.Model):
-    __tablename__ = 'user'
+class Users(db.Model):
+    __tablename__ = 'Users'
 
     id = db.Column(db.String, primary_key=True)
     firstname = db.Column(db.String, nullable=False)
@@ -10,7 +10,7 @@ class User(db.Model):
     picture = db.Column(db.String, nullable=False)
     admin = db.Column(db.Boolean, nullable=False)
 
-    def init(self, uid, firstname, lastname, picture, admin):
+    def __init__(self, uid, firstname, lastname, picture, admin):
         self.id = uid
         self.firstname = firstname
         self.lastname = lastname
@@ -40,4 +40,3 @@ class User(db.Model):
     @staticmethod
     def is_anonymous():
         return False
-

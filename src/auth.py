@@ -1,5 +1,5 @@
 from init import app, auth, db
-from models import User
+from models import Users
 from flask_login import login_user, logout_user, LoginManager
 import flask
 
@@ -34,7 +34,7 @@ login_manager.login_view = 'csh_auth'
 
 @login_manager.user_loader
 def load_user(user_id):
-    q = User.query.get(user_id)
+    q = Users.query.get(user_id)
     if q:
         return q
     return None
@@ -57,16 +57,24 @@ def csh_auth(auth_dict=None):
     """
     if auth_dict is None:
         return flask.redirect("/csh_auth")
-    user = User.query.get(auth_dict['uid'])
+    user = Users.query.get(auth_dict['uid'])
     if user is not None:
         user.firstname = auth_dict['first']
         user.lastname = auth_dict['last']
         user.picture = auth_dict['picture']
         user.admin = auth_dict['admin']
     else:
-        user = User(auth_dict['uid'], auth_dict['first'],
+        user = Users(auth_dict['uid'], auth_dict['first'],
                     auth_dict['last'], auth_dict['picture'], auth_dict['admin'])
         db.session.add(user)
     db.session.commit()
     login_user(user)
-    return flask.redirect('/')
+    goto = flask.request.args.get('goto')
+    if goto == None:
+        goto = 'homepage'
+    goto = flask.url_for(goto)
+    return flask.redirect(goto)
+
+
+with app.app_context():
+        db.create_all()

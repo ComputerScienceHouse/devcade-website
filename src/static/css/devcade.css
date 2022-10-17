@@ -1,17 +1,120 @@
-/* 
-    I put random stuff here for now
-    because I can't find anything that
-    looks half decent
-*/
+/* https://stackoverflow.com/questions/12989916/using-scss-with-flask */
 
-body{
-    background-color:blanchedalmond;
+body {
+    margin: 0px;
 }
-header{
-    text-align: center;
-    background-color: khaki;
+
+h3 {
+    margin: 0px;
 }
-#description{
-    background-color: blueviolet;
-    color: wheat;
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+#header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    background-color: rgba(55, 55, 55, 0.5);
+}
+
+#nav {
+    display: flex;
+    align-items: center;
+    color: white;
+}
+
+#nav>.item {
+    margin: 0px 1em;
+    height: 2em;
+}
+
+#account>div {
+    display: flex;
+}
+
+#pfp {
+    width: 40px;
+    border-radius: 50%;
+    margin-right: .3rem;
+    display: inline;
+    vertical-align: middle;
+}
+
+#bg {
+    width: 100%;
+    height: min(100vh, 400px);
+}
+
+.dropdown-toggle {
+    cursor: pointer;
+}
+
+.dropdown-menu {
+    position: absolute;
+    display: none;
+    top: 100%;
+    z-index: 1000;
+    background-color: #fff;
+    min-width: 10rem;
+    padding: .5rem 0;
+    margin: .125rem 0 0;
+    margin-top: 0.125rem;
+    font-size: .8125rem;
+    text-align: left;
+    list-style: none;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0, 0, 0, .15);
+    border-radius: .25rem;
+}
+
+.dropdown-item {
+    display: block;
+    width: 100%;
+    padding: .25rem 1.5rem;
+    clear: both;
+    font-weight: 400;
+    color: #212121;
+}
+
+.cardList {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    width: 80%;
+    margin: auto;
+}
+
+.card {
+    display: inline-block;
+    width: 250px;
+    height: 300px;
+    border: solid red 3px;
+    margin: 2rem;
+}
+
+#feet {
+    width: 100%;
+    background-color: black;
+    color: white;
+    justify-content: center;
+    display: flex;
+}
+
+#feet-flex {
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0px;
+    width: min(100%, 600px);
+}
+
+.social>img {
+    height: 2rem;
+    filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(0%) hue-rotate(2deg) brightness(102%) contrast(104%);
 }
