@@ -13,7 +13,7 @@
       rel="shortcut icon"
       href="{{ url_for('static', filename='favicon.ico') }}"
     />
-    <title>Devcade</title>
+    <title>{% block title %}Devcade{% endblock %}</title>
   </head>
   <body>
     <div id="header">
@@ -26,7 +26,7 @@
         {% if current_user.is_authenticated %}
         <div class="item" id="account">
           <div class="dropdown-toggle" href="#" id="user01">
-            <img class="navUser" src="{{ current_user.picture }}" id="pfp"/> {{
+            <img class="navUser" src="{{ current_user.picture }}" id="pfp" /> {{
             current_user.firstname }} {{ current_user.lastname }}
             <span class="caret"></span>
           </div>
@@ -61,6 +61,12 @@
     />
     <!-- <div id="spaceholder"><h1>L</h1></div> -->
     <div id="content">{% block content %}{% endblock %}</div>
+    <div id="feet">
+      <div id="feet-flex">
+        <div class="social"><img alt="github" src="{{ url_for('static', filename='icons/github.svg') }}" /></div>
+        <div class="social"><img alt="instagram" src="{{ url_for('static', filename='icons/instagram.svg') }}" /></div>
+      </div>
+    </div>
   </body>
 </html>
 

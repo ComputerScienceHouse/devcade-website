@@ -1,5 +1,16 @@
 {% extends "header.html" %}
 {% block bgSRC %}./static/images/potate.jpg{% endblock %}
+{% block title %}{{title}}{% endblock %}
 {% block content %}
-<p id="description">upoad shit ehre</p>
+{% if current_user.is_authenticated %}
+<h1>Upload things</h1>
+<h3>Things you uploaded:</h3>
+<div class="cardList">
+    {% for i in range(10) %}
+    <div class="card">Your mom #{{ i + 1 }}</div>
+    {% endfor %}
+</div>
+{% else %}
+<p id="description">You gotta log in, dipshit.</p>
+{% endif %}
 {% endblock %}

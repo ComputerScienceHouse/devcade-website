@@ -86,3 +86,39 @@ a {
     font-weight: 400;
     color: #212121;
 }
+
+.cardList {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    width: 80%;
+    margin: auto;
+}
+
+.card {
+    display: inline-block;
+    width: 250px;
+    height: 300px;
+    border: solid red 3px;
+    margin: 2rem;
+}
+
+#feet {
+    width: 100%;
+    background-color: black;
+    color: white;
+    justify-content: center;
+    display: flex;
+}
+
+#feet-flex {
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0px;
+    width: min(100%, 600px);
+}
+
+.social>img {
+    height: 2rem;
+    filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(0%) hue-rotate(2deg) brightness(102%) contrast(104%);
+}
