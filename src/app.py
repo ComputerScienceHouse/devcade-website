@@ -20,4 +20,4 @@ def uploadpage():
     return flask.render_template('upload.html', title='Devcade - Upload')
 
 if __name__ == '__main__':
-    app.run(host='localhost')
+    app.run(host='localhost', debug=True)

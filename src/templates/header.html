@@ -16,7 +16,7 @@
     <title>{% block title %}Devcade{% endblock %}</title>
   </head>
   <body>
-    <div id="header">
+    <div id="nav-bar">
       <a href='/' id="title"><h1>Devacde</h1></a>
       <div id="nav">
         <div class="item"><a href="/">Home</a></div>
@@ -54,13 +54,17 @@
         {% endif %}
       </div>
     </div>
-    <img
-      id="bg"
-      src="{% block bgSRC %}./static/images/neonBG.jpg{% endblock %}"
-      alt="background"
-    />
+    <div class="header">
+      <img
+        id="bg"
+        src="{% block bgSRC %}./static/images/DevcadeLogo.png{% endblock %}"
+        alt="background"
+      />
+    </div>
     <!-- <div id="spaceholder"><h1>L</h1></div> -->
-    <div id="content">{% block content %}{% endblock %}</div>
+    <div id="content-wrapper">
+      {% block content %}{% endblock %}
+    </div>
     <div id="feet">
       <div id="feet-flex">
         <div class="social"><img alt="github" src="{{ url_for('static', filename='icons/github.svg') }}" /></div>
