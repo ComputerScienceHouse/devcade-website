@@ -42,6 +42,13 @@ h2 {
   font-weight: 500;
 }
 
+li {
+  font-size: 0.7em;
+  font-family: "Rubik Medium", Rubik, Roboto, sans-serif;
+  color: var(--fg);
+  font-weight: 500;
+}
+
 .spaced-h3 {
   margin-top: 1em;
 }
@@ -96,7 +103,8 @@ u {
     display: flex;
     justify-content: space-between;
     width: 100%;
-    background-color: rgba(55, 55, 55, 0.5);
+    background-color: var(--bg);
+    opacity: .8;
 }
 
 #nav {
@@ -127,7 +135,11 @@ u {
     justify-content: center;
     background:
       linear-gradient(rgba(0,0,0,0) 20%, var(--bg) 100%),
-      repeat top/2.5em url('../images/csh_tilted.png');
+      repeat top/5.5em url('../static/images/csh_tilted.png');
+}
+
+img.header {
+  width: 50%;
 }
 
 #bg {
@@ -137,21 +149,44 @@ u {
 .dropdown-toggle {
     cursor: pointer;
 }
+
+.title {
+  margin-left: auto;
+  margin-right: auto;
+  display: inline-block;
+}
   
 #content-wrapper {
   margin-left: auto;
   margin-right: auto;
   display: inline-block;
   display: grid;
-  grid-template-columns: 2fr 1fr;
+  grid-template-columns: 1fr 1fr;
   grid-template-rows: auto auto auto auto;
   grid-template-areas:
     "a d"
     "b d"
     "c e";
   grid-gap: 1em 1em;
-  max-width: 40em;
-  padding: 0 1em;
+  max-width: 50em;
+  padding: 0 .5em;
+}
+
+#filedrop-wrapper {
+  margin-left: auto;
+  margin-right: auto;
+  display: inline-block;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: auto auto auto auto;
+  grid-template:
+    "a b"
+    "c d"
+    "c d"
+    "e e";
+  grid-gap: 1em 1em;
+  max-width: 50em;
+  padding: 0 .5em;
 }
   
 .card {
@@ -160,6 +195,9 @@ u {
   border-color: #50103D;
   border-width: 2pt;
   border-radius: 0.25em;
+  background-clip:border-box;
+  border:0 solid transparent;
+  border-radius:.25rem
 }
   
 @media screen and (max-width: 60em) {

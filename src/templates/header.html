@@ -17,7 +17,8 @@
   </head>
   <body>
     <div id="nav-bar">
-      <a href='/' id="title"><h1>Devacde</h1></a>
+      <a href="/" class="title"><img style="height:3em" src="{{ url_for('static', filename='images/DevcadeLogoNoText.png') }}" /></a>
+      <a href='/' class="title"><h1>Devacde</h1></a>
       <div id="nav">
         <div class="item"><a href="/">Home</a></div>
         <div class="item"><a href="/about">About</a></div>
@@ -43,7 +44,7 @@
               src="{{ url_for('static', filename='images/guest.png') }}"
               id="pfp"
             />
-            Guest
+            Jeff Mahoney
             <span class="caret"></span>
           </div>
           <div class="dropdown-menu">
@@ -60,6 +61,7 @@
         src="{% block bgSRC %}./static/images/DevcadeLogo.png{% endblock %}"
         alt="background"
       />
+      <h1>{% block headertext %}{%endblock%}</h1>
     </div>
     <!-- <div id="spaceholder"><h1>L</h1></div> -->
     <div id="content-wrapper">
