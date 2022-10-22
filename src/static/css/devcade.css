@@ -224,18 +224,15 @@ a:hover {
   text-decoration: underline;
 }
 
-.btn#apply {
-  font-family: "Rubik Mono One", Rubik, Roboto, sans-serif;
-  font-size: 0.6em;
-  margin-top: 1em;
-}
-
 .btn-red {
   background: var(--csh-secondary);
   transition: 0.3s background;
   color: white;
   padding: 0.5em 2em;
   border-radius: 40px;
+  font-family: "Rubik Mono One", Rubik, Roboto, sans-serif;
+  font-size: 0.6em;
+  margin-top: 1em;
 }
 
 .btn-red:hover {

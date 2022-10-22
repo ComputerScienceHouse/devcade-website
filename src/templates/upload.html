@@ -7,9 +7,11 @@
 <div id="filedrop-wrapper">
     <div class="card">
         <h2>Drop your files here:</h2>
-        <img style="border-style: dashed" src="{{ url_for('static', filename='images/csh_tilted.png') }}" />
-        <p></p>
-        <a class="btn btn-red" href="" id="apply">Upload</a>
+        <form action = "/upload_game" method="POST" enctype="multipart/form-data">
+        <img style="border-color:gray;border-style: dashed" src="{{ url_for('static', filename='images/csh_tilted.png') }}" />
+        <input type="file" name="file" accept=".zip">
+        <input type="submit"><a class="btn btn-red" href="/upload" id="apply">Upload</a></input>
+        </form>
     </div>
     <div class="card">
         <h2>How to Upload:</h2>
@@ -26,14 +28,16 @@
 </div>
 <div id="content-wrapper">
 {% for i in range(0,gamelist|length) %}
+{% if gamelist[i].author == current_user.id %}
 <div class="card">
     <h2>{{ gamelist[i].title }}</h2>
     <p>{{ gamelist[i].author }}</p>
     <img src="{{ url_for('static', filename='images/csh_tilted.png') }}" />
     <p>{{ gamelist[i].desc }}</p>
     <p></p>
-    <a class="btn btn-red" href="" id="apply">Edit</a>
+    <a class="btn btn-red" href="">Edit</a>
 </div>
+{% endif %}
 {% endfor %}
 {% else %}
 <p id="description">You gotta log in, dipshit.</p>

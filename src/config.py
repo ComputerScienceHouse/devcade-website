@@ -1,6 +1,5 @@
 from os import environ as env
 
-
 # automatically updates some dev envs. 
 try:
     __import__('envs.py')
@@ -22,6 +21,9 @@ SQLALCHEMY_DATABASE_URI = env.get(
 if POSTGRESQL_USER == '':
     SQLALCHEMY_DATABASE_URI = 'sqlite:///users.sqlite3'
 SQLALCHEMY_TRACK_MODIFICATIONS = 'False'
+
+AWS_ACCESS_KEY_ID = env.get('AWS_ACCESS_KEY_ID', '')
+AWS_SECRET_ACCESS_KEY = env.get('AWS_SECRET_ACCESS_KEY', '')
 
 # OpenID Connect SSO config CSH
 OIDC_ISSUER = env.get('OIDC_ISSUER', 'https://sso.csh.rit.edu/auth/realms/csh')

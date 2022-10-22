@@ -1,6 +1,8 @@
 import flask
+from werkzeug.utils import secure_filename
 from flask_login import login_required, current_user
 from auth import app
+import config
 
 games = [
     {
@@ -27,6 +29,31 @@ games = [
     }
 ]
 
+saves = {
+    "mcdade" : [
+    {
+        "title": "Brickbreaker",
+        "highscore":None
+    }, {
+        "title": "Spacewar!",
+        "highscore":None
+    }, {
+        "title": "Minecraft",
+        "highscore": 350
+    }],
+    "cinnamon" : [
+    {
+        "title": "Brickbreaker",
+        "highscore": 200
+    }, {
+        "title": "Spacewar!",
+        "highscore": 63
+    }, {
+        "title": "Minecraft",
+        "highscore": None
+    }]
+}
+
 @app.route('/')
 # @login_required
 def homepage():
@@ -40,9 +67,27 @@ def aboutpage():
 def catalogpage():
     return flask.render_template('catalog.html', gamelist=games)
 
+@app.route('/user/<uname>')
+def userprofile(uname):
+    return flask.render_template('profile.html', savelist=saves[uname])
+
+@app.route('/upload_game', methods = ['POST'])
+def uploadgame():
+    if flask.request.method == 'POST':
+        f = flask.request.files['file']
+        f.save(secure_filename(f.filename))
+        return '', 204
+
 @app.route('/upload')
 def uploadpage():
     return flask.render_template('upload.html', title='Devcade - Upload', gamelist=games)
+
+def upload(file, key):
+
+    bucket = s3.Bucket('devcade-games')
+
+    bucket.upload_file(Filename=file,
+                       Key=key)
 
 if __name__ == '__main__':
     app.run(host='localhost', debug=True)
