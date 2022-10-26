@@ -1,5 +1,12 @@
 {% extends "header.html" %}
-{% block bgSRC %}./static/images/potate.jpg{% endblock %}
+{% block headertext %} Game Catalog {%endblock%}
 {% block content %}
-<p id="description">uhh games here</p>
+{% for i in range(0,gamelist|length) %}
+<div class="card">
+    <h2>{{ gamelist[i].title }}</h2>
+    <p>{{ gamelist[i].author }}</p>
+    <img src="{{ url_for('static', filename='images/csh_tilted.png') }}" />
+    <p>{{ gamelist[i].desc }}</p>
+</div>
+{% endfor %}
 {% endblock %}

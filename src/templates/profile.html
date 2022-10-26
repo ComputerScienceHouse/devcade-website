@@ -1,0 +1,19 @@
+{% extends "header.html" %}
+{% block title %}{{title}}{% endblock %}
+{% block headertext %} {{ current_user.firstname }} {{current_user.lastname }} (@{{ current_user.id }}) {%endblock%}
+{% block content %}
+{% if current_user.is_authenticated %}
+</div>
+<div id="content-wrapper">
+{% for i in range(0,savelist|length) %}
+{% if savelist[i].highscore %}
+<div class="card">
+    <h2>{{ savelist[i].title }}</h2>
+    <p>{{ savelist[i].highscore }}</p>
+</div>
+{% endif %}
+{% endfor %}
+{% else %}
+<p id="description">You gotta log in, dipshit.</p>
+{% endif %}
+{% endblock %}

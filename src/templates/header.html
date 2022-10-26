@@ -16,13 +16,16 @@
     <title>{% block title %}Devcade{% endblock %}</title>
   </head>
   <body>
-    <div id="header">
-      <a href='/' id="title"><h1>Devacde</h1></a>
+    <div id="nav-bar">
+      <div class="title">
+        <a href="/" class="title"><img style="height:3em" src="{{ url_for('static', filename='images/DevcadeLogoNoText.png') }}" /></a>
+        <a href='/' class="title"><h1>Devcade</h1></a>
+      </div>
       <div id="nav">
         <div class="item"><a href="/">Home</a></div>
         <div class="item"><a href="/about">About</a></div>
         <div class="item"><a href="/catalog">Catalog</a></div>
-        <div class="item"><a href="upload">Upload</a></div>
+        <div class="item"><a href="/upload">Upload</a></div>
         {% if current_user.is_authenticated %}
         <div class="item" id="account">
           <div class="dropdown-toggle" href="#" id="user01">
@@ -32,6 +35,7 @@
           </div>
           <div class="dropdown-menu">
             <!-- <div class="dropdown-divider"></div> -->
+            <a class="dropdown-item" href="/user/{{ current_user.id }}">User Profile</a>
             <a class="dropdown-item" href="/logout">Logout</a>
           </div>
         </div>
@@ -43,7 +47,7 @@
               src="{{ url_for('static', filename='images/guest.png') }}"
               id="pfp"
             />
-            Guest
+            Jeff Mahoney
             <span class="caret"></span>
           </div>
           <div class="dropdown-menu">
@@ -54,13 +58,18 @@
         {% endif %}
       </div>
     </div>
-    <img
-      id="bg"
-      src="{% block bgSRC %}./static/images/neonBG.jpg{% endblock %}"
-      alt="background"
-    />
+    <div class="header">
+      <img
+        id="bg"
+        src="{% block bgSRC %}{{ url_for('static', filename='images/DevcadeLogo.png') }}{% endblock %}"
+        alt="background"
+      />
+      <h1>{% block headertext %}{%endblock%}</h1>
+    </div>
     <!-- <div id="spaceholder"><h1>L</h1></div> -->
-    <div id="content">{% block content %}{% endblock %}</div>
+    <div id="content-wrapper">
+      {% block content %}{% endblock %}
+    </div>
     <div id="feet">
       <div id="feet-flex">
         <div class="social"><img alt="github" src="{{ url_for('static', filename='icons/github.svg') }}" /></div>
