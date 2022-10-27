@@ -40,7 +40,7 @@
           <div class="item" id="account">
             <div class="dropdown-toggle" href="#" id="user01">
               <img class="navUser" src="{{ current_user.picture }}" id="pfp" />
-              {{ current_user.firstname }} {{ current_user.lastname }}
+              <div id="uname">{{ current_user.firstname }} {{ current_user.lastname }}</div>
               <span class="caret"></span>
             </div>
             <div class="dropdown-menu dropped hidden">
@@ -59,7 +59,7 @@
                 src="{{ url_for('static', filename='images/guest.png') }}"
                 id="pfp"
               />
-              Guest
+              <div id="uname">Guest</div>
               <span class="caret"></span>
             </div>
             <div class="dropdown-menu dropped hidden">

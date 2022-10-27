@@ -183,6 +183,13 @@ img.header {
 
 .title>* {
   display: inline-block;
+  vertical-align: middle;
+}
+
+#uname {
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: 0.5em;
 }
 
 #content-wrapper {
