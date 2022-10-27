@@ -76,11 +76,7 @@ def catalogpage():
 def user():
     if not current_user.is_authenticated:
         return flask.redirect('/login')
-    return flask.redirect('/user/' + current_user.id)
-
-@app.route('/user/<uname>')
-def userprofile(uname):
-    return flask.render_template('profile.html', savelist=saves[uname])
+    return flask.render_template('profile.html', savelist=saves[current_user.id])
 
 @app.route('/game/<id>')
 def getgame(id):
@@ -110,6 +106,15 @@ def upload(file, key):
 
     bucket.upload_file(Filename=file,
                        Key=key)
+
+@app.errorhandler(Exception)
+def page404(e):
+    eCode = e.code
+    message = e.description
+    try:
+        message = e.length
+    finally:
+        return flask.render_template('error.html', error=eCode, message=message)
 
 if __name__ == '__main__':
     app.run(host='localhost', debug=True)
