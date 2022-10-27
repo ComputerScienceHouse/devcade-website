@@ -1,33 +1,37 @@
 /* https://stackoverflow.com/questions/12989916/using-scss-with-flask */
 :root {
-    --csh-primary: #B0197E;
-    --csh-secondary: #E11C52;
-    --bg: #25021A;
-    --fg: #FFFFFF;
-  }
+  --csh-primary: #B0197E;
+  --csh-secondary: #E11C52;
+  --bg: #25021A;
+  --fg: #FFFFFF;
+}
 
 html {
-    background: var(--bg1);
+  background: var(--bg1);
 }
 
-  
+
 * {
-    box-sizing: border-box;
-  }
+  box-sizing: border-box;
+}
 
 body {
-    margin: 0px;
-    background: var(--bg);
-    color: var(--fg);
-    height: 100%;
-    width: 100%;
-    min-height: 100vh;
-    padding: 0 0;
-    padding-bottom: 2em;
-    font-family: Rubik, Roboto, sans-serif;
-    font-size: calc(10pt + 1vmin);
+  margin: 0px;
+  background: var(--bg);
+  color: var(--fg);
+  height: 100%;
+  width: 100%;
+  min-height: 100vh;
+  padding: 0 0;
+  padding-bottom: 2em;
+  font-family: Rubik, Roboto, sans-serif;
+  font-size: calc(10pt + 1vmin);
 }
-  
+
+.hidden {
+  display: none;
+}
+
 h1 {
   font-size: 1em;
   font-weight: 400;
@@ -70,22 +74,22 @@ p {
 }
 
 a {
-    text-decoration: none;
-    color: white;
+  text-decoration: none;
+  color: white;
 }
 
 #about-devcade-wrapper {
-    grid-area: a;
+  grid-area: a;
 }
-  
+
 #about-team-wrapper {
-    grid-area: b;
+  grid-area: b;
 }
-  
+
 #about-csh-wrapper {
-    grid-area: d;
+  grid-area: d;
 }
-  
+
 #contact-wrapper {
   margin-top: 1.875em;
 }
@@ -95,47 +99,74 @@ u {
   text-decoration-style: wavy;
 }
 
-
-#nav-bar {
-    position: absolute;
-    top: 0;
-    left: 0;
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    background-color: var(--bg);
-    opacity: .8;
+#navBar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  background-color: var(--bg);
 }
 
 #nav {
-    display: flex;
-    align-items: center;
-    color: white;
+  align-items: center;
+  color: white;
+  width: 100%;
+}
+
+#nav .show {
+  display: flex;
 }
 
 #nav>.item {
-    margin: 0px 1em;
+  margin: 0px 1em;
 }
 
-#account>div {
-    display: flex;
+.navbar-toggler-icon {
+  display: inline-block;
+  width: 3em;
+  margin: 0.5em;
+  vertical-align: middle;
+  background: no-repeat 50%;
+  background-size: 100% 100%;
+  filter: invert(99%) sepia(31%) saturate(24%) hue-rotate(138deg) brightness(107%) contrast(100%);
+}
+
+#user01 {
+  display: flex;
 }
 
 #pfp {
-    width: 40px;
-    border-radius: 50%;
-    margin-right: .3rem;
-    display: inline;
-    vertical-align: middle;
+  width: 40px;
+  border-radius: 50%;
+  margin-right: .3rem;
+  display: inline;
+  vertical-align: middle;
 }
 
 .header {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background:
-      linear-gradient(rgba(0,0,0,0) 20%, var(--bg) 100%),
-      repeat top/5.5em url('../static/images/csh_tilted.png');
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    linear-gradient(rgba(0, 0, 0, 0) 50%, var(--bg) 100%),
+    repeat top/5.5em url('../images/csh_tilted.png');
+}
+
+.crate {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -ms-flex-align: center;
+  align-items: center;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1140px;
+  margin-right: auto;
+  margin-left: auto;
 }
 
 img.header {
@@ -143,19 +174,17 @@ img.header {
 }
 
 #bg {
-    height: min(100vh, 400px);
+  height: min(100vh, 400px);
 }
 
 .dropdown-toggle {
-    cursor: pointer;
+  cursor: pointer;
 }
 
-.title {
-  margin-left: auto;
-  margin-right: auto;
+.title>* {
   display: inline-block;
 }
-  
+
 #content-wrapper {
   margin-left: auto;
   margin-right: auto;
@@ -188,18 +217,18 @@ img.header {
   max-width: 50em;
   padding: 0 .5em;
 }
-  
+
 .card {
   padding: 1.875em;
   background-color: #340526;
   border-color: #50103D;
   border-width: 2pt;
   border-radius: 0.25em;
-  background-clip:border-box;
-  border:0 solid transparent;
-  border-radius:.25rem
+  background-clip: border-box;
+  border: 0 solid transparent;
+  border-radius: .25rem
 }
-  
+
 @media screen and (max-width: 60em) {
   #content-wrapper {
     grid-template-columns: 1fr;
@@ -213,10 +242,9 @@ img.header {
     max-width: 25em;
   }
 }
-  
+
 a:not(.btn) {
   font-family: "Rubik Medium", Rubik, Roboto, sans-serif;
-  color: var(--fg);
   text-decoration: none;
 }
 
@@ -241,57 +269,68 @@ a:hover {
 }
 
 .dropdown-menu {
-    position: absolute;
-    display: none;
-    top: 100%;
-    z-index: 1000;
-    background-color: var(--bg);
-    border-color: var(--csh-primary);
-    min-width: 10rem;
-    padding: .5rem 0;
-    margin: .125rem 0 0;
-    margin-top: 0.125rem;
-    font-size: .8125rem;
-    text-align: left;
-    list-style: none;
-    background-clip: padding-box;
-    border: 1px solid rgba(0, 0, 0, .15);
-    border-radius: .25rem;
+  position: absolute;
+  top: 100%;
+  z-index: 1000;
+  background-color: var(--fg);
+  color: var(--bg);
+  border-color: var(--csh-primary);
+  min-width: 10rem;
+  padding: .5rem 0;
+  margin: .125rem 0 0;
+  margin-top: 0.125rem;
+  font-size: .8125rem;
+  text-align: left;
+  list-style: none;
+  background-clip: padding-box;
+  border: 1px solid rgba(0, 0, 0, .15);
+  border-radius: .25rem;
 }
 
 .dropdown-item {
-    display: block;
-    width: 100%;
-    padding: .25rem 1.5rem;
-    clear: both;
-    font-weight: 400;
-    color: #212121;
+  display: block;
+  width: 100%;
+  padding: .25rem 1.5rem;
+  clear: both;
+  font-weight: 400;
+  color: #212121;
 }
 
 .cardList {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-    width: 80%;
-    margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  width: 80%;
+  margin: auto;
 }
 
 #feet {
-    width: 100%;
-    background-color: black;
-    color: white;
-    justify-content: center;
-    display: flex;
+  width: 100%;
+  background-color: black;
+  color: white;
+  justify-content: center;
+  display: flex;
 }
 
 #feet-flex {
-    display: flex;
-    justify-content: space-around;
-    padding: 10px 0px;
-    width: min(100%, 600px);
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 0px;
+  width: min(100%, 600px);
 }
 
 .social>img {
-    height: 2rem;
-    filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(0%) hue-rotate(2deg) brightness(102%) contrast(104%);
+  height: 2rem;
+  filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(0%) hue-rotate(2deg) brightness(102%) contrast(104%);
+}
+
+@media only screen and (min-width: 992px) {
+  .navbar-toggler-icon {
+    display: none;
+  }
+
+  #nav {
+    display: flex !important;
+    width: unset;
+  }
 }
