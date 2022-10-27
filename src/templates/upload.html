@@ -29,14 +29,16 @@
 <div id="content-wrapper">
 {% for i in range(0,gamelist|length) %}
 {% if gamelist[i].author == current_user.id %}
+<a href="/game/{{ gamelist[i].id }}">
 <div class="card">
     <h2>{{ gamelist[i].title }}</h2>
     <p>{{ gamelist[i].author }}</p>
     <img src="{{ url_for('static', filename='images/csh_tilted.png') }}" />
     <p>{{ gamelist[i].desc }}</p>
     <p></p>
-    <a class="btn btn-red" href="">Edit</a>
+    <a class="btn btn-red" href="/edit/{{ gamelist[i].id }}">Edit</a>
 </div>
+</a>
 {% endif %}
 {% endfor %}
 {% else %}
