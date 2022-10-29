@@ -88,6 +88,7 @@ def getgame(id):
     return flask.render_template('game.html', game=i, gamelist=games)
 
 @app.route('/upload_game', methods = ['POST'])
+@login_required
 def uploadgame():
     if flask.request.method == 'POST':
         f = flask.request.files['file']
@@ -95,10 +96,13 @@ def uploadgame():
         return '', 204
 
 @app.route('/upload')
+@login_required
 def uploadpage():
-    if not current_user.is_authenticated:
-        return flask.redirect('/login')
-    return flask.render_template('upload.html', title='Devcade - Upload', gamelist=games)
+    usergames = []
+    for i in games:
+        if i['author'] == current_user.id:
+            usergames.append(i)
+    return flask.render_template('upload.html', title='Devcade - Upload', gamelist=usergames)
 
 def upload(file, key):
 
@@ -109,10 +113,11 @@ def upload(file, key):
 
 @app.errorhandler(Exception)
 def page404(e):
-    eCode = e.code
-    message = e.description
+    eCode = 500
+    message = "An unknown error occured!"
     try:
-        message = e.length
+        message = e.description
+        eCode = e.code
     finally:
         return flask.render_template('error.html', error=eCode, message=message)
 

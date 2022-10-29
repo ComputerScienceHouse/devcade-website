@@ -78,22 +78,6 @@ a {
   color: white;
 }
 
-#about-devcade-wrapper {
-  grid-area: a;
-}
-
-#about-team-wrapper {
-  grid-area: b;
-}
-
-#about-csh-wrapper {
-  grid-area: d;
-}
-
-#contact-wrapper {
-  margin-top: 1.875em;
-}
-
 u {
   font-weight: 400;
   text-decoration-style: wavy;
@@ -192,37 +176,45 @@ img.header {
   margin-left: 0.5em;
 }
 
-#content-wrapper {
+#content {
   margin-left: auto;
   margin-right: auto;
-  display: inline-block;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: auto auto auto auto;
-  grid-template-areas:
-    "a d"
-    "b d"
-    "c e";
-  grid-gap: 1em 1em;
-  max-width: 50em;
+  max-width: 55em;
   padding: 0 .5em;
 }
 
-#filedrop-wrapper {
-  margin-left: auto;
-  margin-right: auto;
-  display: inline-block;
+#homeGrid {
   display: grid;
-  grid-template-columns: 2fr 1fr;
-  grid-template-rows: auto auto auto auto;
-  grid-template:
-    "a b"
-    "c d"
-    "c d"
-    "e e";
   grid-gap: 1em 1em;
-  max-width: 50em;
-  padding: 0 .5em;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto;
+  grid-template-areas:
+    "a"
+    "d"
+    "c"
+    "b"
+    "e";
+}
+
+#about-devcade-wrapper {
+  grid-area: a;
+}
+
+#about-team-wrapper {
+  grid-area: b;
+}
+
+#about-csh-wrapper {
+  grid-area: d;
+}
+
+#contact-wrapper {
+  margin-top: 1.875em;
+}
+
+.card-wrapper {
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .card {
@@ -233,20 +225,19 @@ img.header {
   border-radius: 0.25em;
   background-clip: border-box;
   border: 0 solid transparent;
-  border-radius: .25rem
+  border-radius: .25rem;
+  width: min(90%, 24em);
+  margin: 0.5em auto;
+}
+
+.max {
+  max-width: 100%;
+  max-height: 100%;
 }
 
 @media screen and (max-width: 60em) {
-  #content-wrapper {
-    grid-template-columns: 1fr;
-    grid-template-rows: auto;
-    grid-template-areas:
-      "a"
-      "d"
-      "c"
-      "b"
-      "e";
-    max-width: 25em;
+  .card-wrapper {
+    max-width: 100%;
   }
 }
 
@@ -303,14 +294,6 @@ a:hover {
   color: #212121;
 }
 
-.cardList {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-  width: 80%;
-  margin: auto;
-}
-
 #feet {
   width: 100%;
   background-color: black;
@@ -332,6 +315,15 @@ a:hover {
 }
 
 @media only screen and (min-width: 992px) {
+  #homeGrid {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto auto auto;
+    grid-template-areas:
+      "a d"
+      "b d"
+      "c e";
+  }
+
   .navbar-toggler-icon {
     display: none;
   }
