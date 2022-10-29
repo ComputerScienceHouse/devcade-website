@@ -3,8 +3,6 @@
 {% block headertext %} {{ current_user.firstname }} {{current_user.lastname }} (@{{ current_user.id }}) {%endblock%}
 {% block content %}
 {% if current_user.is_authenticated %}
-</div>
-<div id="content-wrapper">
 {% for i in range(0,savelist|length) %}
 {% if savelist[i].highscore %}
 <div class="card">

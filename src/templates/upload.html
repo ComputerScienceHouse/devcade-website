@@ -3,12 +3,11 @@
 {% block headertext %} Upload Files {%endblock%}
 {% block content %}
 {% if current_user.is_authenticated %}
-</div>
-<div id="filedrop-wrapper">
+<div class="card-wrapper">
     <div class="card">
         <h2>Drop your files here:</h2>
         <form action = "/upload_game" method="POST" enctype="multipart/form-data">
-        <img style="border-color:gray;border-style: dashed" src="{{ url_for('static', filename='images/csh_tilted.png') }}" />
+        <img style="border-color:gray;border-style: dashed" class="max" src="{{ url_for('static', filename='images/csh_tilted.png') }}" />
         <input type="file" name="file" accept=".zip">
         <input type="submit"><a class="btn btn-red" href="/upload" id="apply">Upload</a></input>
         </form>
@@ -24,22 +23,26 @@
             <li>Upload file</li>
         </ol>
     </div>
+</div>
     <h1>Your files:</h1>
-</div>
-<div id="content-wrapper">
-{% for i in range(0,gamelist|length) %}
-{% if gamelist[i].author == current_user.id %}
+<div id="card-wrapper">
+{% for i in gamelist %}
+<a href="/game/i.id }}">
 <div class="card">
-    <h2>{{ gamelist[i].title }}</h2>
-    <p>{{ gamelist[i].author }}</p>
-    <img src="{{ url_for('static', filename='images/csh_tilted.png') }}" />
-    <p>{{ gamelist[i].desc }}</p>
+    <h2>{{ i.title }}</h2>
+    <p>{{ i.author }}</p>
+    <img class="max" src="{{ url_for('static', filename='images/csh_tilted.png') }}" />
+    <p>{{ i.desc }}</p>
     <p></p>
-    <a class="btn btn-red" href="">Edit</a>
+    <a class="btn btn-red" href="/edit/{{ i.id }}">Edit</a>
 </div>
-{% endif %}
+</a>
 {% endfor %}
+{% if gamelist|length == 0 %}
+<h2>You have no uploads!</h2>
+{% endif %}
+</div>
 {% else %}
-<p id="description">You gotta log in, dipshit.</p>
+<p id="description">This shouldn't be possible.  You're not authorized but you are logged in?  wacky.</p>
 {% endif %}
 {% endblock %}
