@@ -215,6 +215,7 @@ img.header {
 .card-wrapper {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 .card {
@@ -228,6 +229,18 @@ img.header {
   border-radius: .25rem;
   width: min(90%, 24em);
   margin: 0.5em auto;
+}
+
+.subcontent {
+  padding: 1.875em;
+  background-color: #340526;
+  border-color: #50103D;
+  border-width: 2pt;
+  border-radius: 0.25em;
+  background-clip: border-box;
+  border: 0 solid transparent;
+  border-radius: .25rem;
+  margin: 0 auto;
 }
 
 .max {
@@ -326,6 +339,10 @@ a:hover {
 
   .navbar-toggler-icon {
     display: none;
+  }
+
+  .card {
+    margin: 0.5em;
   }
 
   #nav {
