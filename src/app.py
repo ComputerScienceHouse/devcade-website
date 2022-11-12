@@ -2,7 +2,7 @@ import flask
 from werkzeug.utils import secure_filename
 from flask_login import login_required, current_user
 from auth import app
-import config
+import requests
 
 games = [
     {
@@ -92,8 +92,11 @@ def getgame(id):
 def uploadgame():
     if flask.request.method == 'POST':
         f = flask.request.files['file']
-        f.save(secure_filename(f.filename))
-        return '', 204
+        title = flask.request.args.get('title')
+        files = {'file': f.stream}
+        values = {'title': title}
+        r = requests.post(app.config["DEVCADE_API_URI"] + "games/upload", files=files, data=values)
+        return "<p>" + r.text + "</p>"
 
 @app.route('/upload')
 @login_required
@@ -103,13 +106,6 @@ def uploadpage():
         if i['author'] == current_user.id:
             usergames.append(i)
     return flask.render_template('upload.html', title='Devcade - Upload', gamelist=usergames)
-
-def upload(file, key):
-
-    bucket = s3.Bucket('devcade-games')
-
-    bucket.upload_file(Filename=file,
-                       Key=key)
 
 @app.errorhandler(Exception)
 def page404(e):
