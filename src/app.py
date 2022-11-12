@@ -93,8 +93,7 @@ def uploadgame():
     if flask.request.method == 'POST':
         f = flask.request.files['file']
         title = flask.request.args.get('title')
-        f.save(secure_filename(f.filename))
-        files = {'file': open(f.filename,'rb')}
+        files = {'file': f.stream}
         values = {'title': title}
         r = requests.post(app.config["DEVCADE_API_URI"] + "games/upload", files=files, data=values)
         return "<p>" + r.text + "</p>"
@@ -108,15 +107,15 @@ def uploadpage():
             usergames.append(i)
     return flask.render_template('upload.html', title='Devcade - Upload', gamelist=usergames)
 
-@app.errorhandler(Exception)
-def page404(e):
-    eCode = 500
-    message = "An unknown error occured!"
-    try:
-        message = e.description
-        eCode = e.code
-    finally:
-        return flask.render_template('error.html', error=eCode, message=message)
+# @app.errorhandler(Exception)
+# def page404(e):
+#     eCode = 500
+#     message = "An unknown error occured!"
+#     try:
+#         message = e.description
+#         eCode = e.code
+#     finally:
+#         return flask.render_template('error.html', error=eCode, message=message)
 
 if __name__ == '__main__':
     app.run(host='localhost', debug=True)
