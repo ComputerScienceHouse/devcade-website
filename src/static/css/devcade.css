@@ -2,6 +2,7 @@
 :root {
   --csh-primary: #B0197E;
   --csh-secondary: #E11C52;
+  --csh-tertiary: #340526;
   --bg: #25021A;
   --fg: #FFFFFF;
 }
@@ -309,7 +310,7 @@ a:hover {
 
 #feet {
   width: 100%;
-  background-color: black;
+  background-color: var(--csh-tertiary);
   color: white;
   justify-content: center;
   display: flex;
