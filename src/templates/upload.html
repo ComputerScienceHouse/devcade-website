@@ -30,7 +30,7 @@
 {% for i in gamelist %}
 <a href="/game/i.id }}">
 <div class="card">
-    <h2>{{ i.title }}</h2>
+    <h2>{{ i.name }}</h2>
     <p>{{ i.author }}</p>
     <img class="max" src="{{ url_for('static', filename='images/csh_tilted.png') }}" />
     <p>{{ i.desc }}</p>
