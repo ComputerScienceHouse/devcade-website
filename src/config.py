@@ -29,3 +29,5 @@ AWS_SECRET_ACCESS_KEY = env.get('AWS_SECRET_ACCESS_KEY', '')
 OIDC_ISSUER = env.get('OIDC_ISSUER', 'https://sso.csh.rit.edu/auth/realms/csh')
 OIDC_CLIENT_ID = env.get('OIDC_CLIENT_ID', 'devcade')
 OIDC_CLIENT_SECRET = env.get('OIDC_CLIENT_SECRET', 'NOT-A-SECRET')
+
+DEVCADE_API_URI = env.get('DEVCADE_API_URI')
