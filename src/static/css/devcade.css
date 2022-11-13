@@ -206,11 +206,11 @@ img.header {
 }
 
 #about-team-wrapper {
-  grid-area: d;
+  grid-area: b;
 }
 
 #about-csh-wrapper {
-  grid-area: b;
+  grid-area: d;
 }
 
 #contact-wrapper {
