@@ -2,6 +2,7 @@
 :root {
   --csh-primary: #B0197E;
   --csh-secondary: #E11C52;
+  --csh-tertiary: #340526;
   --bg: #25021A;
   --fg: #FFFFFF;
 }
@@ -170,6 +171,10 @@ img.header {
   vertical-align: middle;
 }
 
+.title:hover {
+  text-decoration: none;
+}
+
 #uname {
   margin-top: auto;
   margin-bottom: auto;
@@ -309,13 +314,12 @@ a:hover {
 
 #feet {
   width: 100%;
-  background-color: black;
+  background-color: var(--csh-tertiary);
   color: white;
-  justify-content: center;
-  display: flex;
 }
 
-#feet-flex {
+.feet-flex {
+  margin: auto;
   display: flex;
   justify-content: space-around;
   padding: 10px 0px;
@@ -332,8 +336,8 @@ a:hover {
     grid-template-columns: 1fr 1fr;
     grid-template-rows: auto auto auto auto;
     grid-template-areas:
+      "a b"
       "a d"
-      "b d"
       "c e";
   }
 
