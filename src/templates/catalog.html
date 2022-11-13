@@ -8,9 +8,8 @@ block content %}
       <p>{{ gamelist[i].author }}</p>
       <img
         class="max"
-        src="{{ url_for('static', filename='images/csh_tilted.png') }}"
+        src="{{ gamelist[i].iconLink }}"
       />
-      <p>{{ gamelist[i].desc }}</p>
     </a>
   </div>
 

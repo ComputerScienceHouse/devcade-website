@@ -3,6 +3,6 @@
 {% block content %}
 <h1>{{ gamelist[game].name }}</h1>
     <p>{{ gamelist[game].author }}</p>
-    <img class="max" src="{{ url_for('static', filename='images/csh_tilted.png') }}" />
-    <p>{{ gamelist[game].desc }}</p>
+    <img class="max" src="{{ gamelist[game].bannerLink }}" />
+    <p>{{ gamelist[game].description }}</p>
 {% endblock %}
