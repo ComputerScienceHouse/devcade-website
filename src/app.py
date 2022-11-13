@@ -40,20 +40,24 @@ def getgame(id):
 def uploadgame():
     if flask.request.method == 'POST':
         f = flask.request.files['file']
-        title = flask.request.args.get('title')
-        files = {'file': f.stream}
-        values = {'title': title}
-        r = requests.post(app.config["DEVCADE_API_URI"] + "games/upload", files=files, data=values)
+        title = flask.request.form['title']
+        f.save(secure_filename(f.filename))
+        file = {'file': ("game.zip", open(f.filename,'rb').read(), "application/zip")}
+        fields = {'title': title}
+        r = requests.post(app.config["DEVCADE_API_URI"] + "games/upload", files=file, data=fields)
         return "<p>" + r.text + "</p>"
 
 @app.route('/upload')
 @login_required
 def uploadpage():
-    games = requests.get(app.config["DEVCADE_API_URI"] + "games/gamelist").json()
     usergames = []
-    for i in games:
-        if i['author'] == current_user.id:
-            usergames.append(i)
+    try:
+        games = requests.get(app.config["DEVCADE_API_URI"] + "games/gamelist").json()
+        for i in games:
+            if i['author'] == current_user.id:
+                usergames.append(i)
+    except(Exception):
+        print("api offline")
     return flask.render_template('upload.html', title='Devcade - Upload', gamelist=usergames)
 
 @app.errorhandler(Exception)
@@ -68,3 +72,5 @@ def page404(e):
 
 if __name__ == '__main__':
     app.run(host='localhost', debug=True)
+
+
