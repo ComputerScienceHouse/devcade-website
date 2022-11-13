@@ -35,8 +35,8 @@
           <div class="item"><a href="/">Home</a></div>
           <div class="item"><a href="/about">About</a></div>
           <div class="item"><a href="/catalog">Catalog</a></div>
-          <div class="item"><a href="/upload">Upload</a></div>
           {% if current_user.is_authenticated %}
+          <div class="item"><a href="/upload">Upload</a></div>
           <div class="item" id="account">
             <div class="dropdown-toggle" href="#" id="user01">
               <img class="navUser" src="{{ current_user.picture }}" id="pfp" />

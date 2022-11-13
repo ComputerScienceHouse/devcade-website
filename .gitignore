@@ -3,3 +3,4 @@ envs.py
 .venv
 venv/
 users.sqlite3
+launch.json
