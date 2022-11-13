@@ -9,6 +9,7 @@
         <form action = "/upload_game" method="POST" enctype="multipart/form-data">
         <img style="border-color:gray;border-style: dashed" class="max" src="{{ url_for('static', filename='images/csh_tilted.png') }}" />
         <input type="text" name="title" placeholder="title">
+        <textarea maxlength="1500" placeholder="Description (max 1500 chars)" name="description"></textarea>
         <input type="file" name="file" accept=".zip">
         <input class="btn btn-red" id="apply" value="Upload" type="submit"></input>
         </form>
