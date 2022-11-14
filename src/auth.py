@@ -72,7 +72,10 @@ def csh_auth(auth_dict=None):
     goto = flask.request.args.get('goto')
     if goto == None:
         goto = 'homepage'
-    goto = flask.url_for(goto)
+    try:
+        goto = flask.url_for(goto)
+    except:
+        goto = flask.url_for('homepage')
     return flask.redirect(goto)
 
 

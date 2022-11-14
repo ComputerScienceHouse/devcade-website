@@ -253,6 +253,14 @@ img.header {
   max-height: 100%;
 }
 
+.std-button{
+  display: inline-block;
+  padding: .5em;
+  border: solid white 2px;
+  background-color: red;
+  border-radius: 10px;
+}
+
 @media screen and (max-width: 60em) {
   .card-wrapper {
     max-width: 100%;

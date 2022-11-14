@@ -1,8 +1,12 @@
-{% extends "header.html" %}
-{% block title %}Devcade - {{gamelist[game].name}}{% endblock %}
-{% block content %}
+{% extends "header.html" %} {% block title %}Devcade - {{gamelist[game].name}}
+{%endblock %} {% block content %}
 <h1>{{ gamelist[game].name }}</h1>
-    <p>{{ gamelist[game].author }}</p>
-    <img class="max" src="{{ gamelist[game].bannerLink }}" />
-    <p>{{ gamelist[game].description }}</p>
-{% endblock %}
+<p>{{ gamelist[game].author }}</p>
+<img class="max" src="{{ gamelist[game].bannerLink }}" />
+<p>{{ gamelist[game].description }}</p>
+{% if current_user.admin %}
+<div class="card-wrapper">
+  <a href='/admin/delete/{{ gamelist[game].id }}'><div class="std-button">Delete</div></a>
+  <div class="std-button">More Admin Stuff...</div>
+</div>
+{% endif %} {% endblock %}
