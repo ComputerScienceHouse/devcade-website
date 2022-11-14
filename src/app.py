@@ -33,7 +33,7 @@ def getgame(id):
             break
     else:
         flask.render_template('404.html')
-    return flask.render_template('game.html', game=i, gamelist=games)
+    return flask.render_template('game.html', game=games[i])
 
 @app.route('/upload_game', methods = ['POST'])
 @login_required
@@ -84,6 +84,7 @@ def page404(e):
     eCode = 500
     message = "An unknown error occured!"
     try:
+        app.log_exception(e)
         message = e.description
         eCode = e.code
     finally:

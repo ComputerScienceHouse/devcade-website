@@ -2,16 +2,7 @@
 block content %}
 <div class="card-wrapper">
   {% for i in range(0,gamelist|length) %}
-  <div class="card">
-    <a href="/game/{{ gamelist[i].id }}">
-      <h2>{{ gamelist[i].name }}</h2>
-      <p>{{ gamelist[i].author }}</p>
-      <img
-        class="max"
-        src="{{ gamelist[i].iconLink }}"
-      />
-    </a>
-  </div>
+  {{ gamecard(gamelist[i]) }}
 
   {% endfor %}
 </div>

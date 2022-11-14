@@ -1,51 +1,61 @@
-{% extends "header.html" %}
-{% block title %}{{title}}{% endblock %}
-{% block headertext %} Upload Files {%endblock%}
-{% block content %}
-{% if current_user.is_authenticated %}
+{% extends "header.html" %} {% block title %}{{title}}{% endblock %} {% block
+headertext %} Upload Files {%endblock%} {% block content %} {% if
+current_user.is_authenticated %}
 <div class="card-wrapper">
-    <div class="card">
-        <h2>Drop your files here:</h2>
-        <form action = "/upload_game" method="POST" enctype="multipart/form-data">
-        <img style="border-color:gray;border-style: dashed" class="max" src="{{ url_for('static', filename='images/csh_tilted.png') }}" />
-        <input type="text" name="title" placeholder="title">
-        <textarea maxlength="1500" placeholder="Description (max 1500 chars)" name="description"></textarea>
-        <input type="file" name="file" accept=".zip">
-        <input class="btn btn-red" id="apply" value="Upload" type="submit"></input>
-        </form>
-    </div>
-    <div class="card">
-        <h2>How to Upload:</h2>
-        <ol>
-            <li>Navigate to the folder containing your Monogame game.</li>
-            <li>Run <br><code>dotnet publish -c Release -r linux-x64 --self-contained</code></li>
-            <li>Navigate to the newly created publish folder.</li>
-            <li>Create a zip archive containing this folder, a <code>banner.png</code>, and a <code>icon.png</code></li>
-            <li><strong>The name of the game binary must match the name you enter!</strong> (ex. If the title is `BrickBreaker`, the executable should be `BrickBreaker`)</li>
-            <li>Upload file</li>
-        </ol>
-    </div>
+  <div class="card" id="upload-card">
+    <h2>Drop your files here:</h2>
+    <form action="/upload_game" method="POST" enctype="multipart/form-data">
+      <img
+        style="border-color: gray; border-style: dashed"
+        class="max"
+        src="{{ url_for('static', filename='images/csh_tilted.png') }}"
+      />
+      <input type="text" name="title" placeholder="title" />
+      <textarea
+        maxlength="1500"
+        placeholder="Description (max 1500 chars)"
+        name="description"
+      ></textarea>
+      <input type="file" name="file" accept=".zip" />
+      <input class="btn btn-red" id="apply" value="Upload" type="submit" />
+    </form>
+  </div>
+  <div class="card">
+    <h2>How to Upload:</h2>
+    <ol>
+      <li>Navigate to the folder containing your Monogame game.</li>
+      <li>
+        Run <br /><code
+          >dotnet publish -c Release -r linux-x64 --self-contained</code
+        >
+      </li>
+      <li>Navigate to the newly created publish folder.</li>
+      <li>
+        Create a zip archive containing this folder, a <code>banner.png</code>,
+        and a <code>icon.png</code>
+      </li>
+      <li>
+        <strong
+          >The name of the game binary must match the name you enter!</strong
+        >
+        (ex. If the title is `BrickBreaker`, the executable should be
+        `BrickBreaker`)
+      </li>
+      <li>Upload file</li>
+    </ol>
+  </div>
 </div>
-    <h1>Your games:</h1>
+<h1>Your games:</h1>
 <div class="card-wrapper">
-{% for i in gamelist %}
-<a href="/game/{{ i.id }}">
-<div class="card">
-    <h2>{{ i.name }}</h2>
-    <p>{{ i.author }}</p>
-    <img class="max" src="{{ i.iconLink }}" />
-    <p>{{ i.desc }}</p>
-    <p></p>
-    <a class="btn btn-red" href="/edit/{{ i.id }}">Edit</a>
-    <a class="btn btn-red" href="/admin/delete/{{ i.id }}">Delete</a>
-</div>
-</a>
-{% endfor %}
-{% if gamelist|length == 0 %}
-<h2>You have no uploads!</h2>
-{% endif %}
+  {% for i in gamelist %}
+  {{ gamecard(i) }}
+  {% endfor %} {% if gamelist|length == 0 %}
+  <h2>You have no uploads!</h2>
+  {% endif %}
 </div>
 {% else %}
-<p id="description">This shouldn't be possible.  You're not authorized but you are logged in?  wacky.</p>
-{% endif %}
-{% endblock %}
+<p id="description">
+  This shouldn't be possible. You're not authorized but you are logged in?
+  wacky.
+</p>
+{% endif %} {% endblock %}
