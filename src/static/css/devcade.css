@@ -24,7 +24,6 @@ body {
   width: 100%;
   min-height: 100vh;
   padding: 0 0;
-  padding-bottom: 2em;
   font-family: Rubik, Roboto, sans-serif;
   font-size: calc(10pt + 1vmin);
 }
@@ -223,6 +222,10 @@ img.header {
   justify-content: center;
 }
 
+.card, .game-card {
+  margin: 0.5em auto;
+}
+
 .card {
   padding: 1.875em;
   background-color: #340526;
@@ -233,7 +236,51 @@ img.header {
   border: 0 solid transparent;
   border-radius: .25rem;
   width: min(90%, 24em);
-  margin: 0.5em auto;
+}
+
+#upload-card textarea{
+  width: 100%;
+}
+
+.game-card {
+  display: grid;
+  grid-template-columns: 20% 80%;
+  grid-template-rows: 1fr 1fr;
+  grid-template-areas: "icon name""icon desc";
+  width: min(90vw, 25em);
+  height: 200px;
+  padding: 0.5em 5px;
+  border-radius: 10px;
+}
+
+.game-icon {
+  grid-area: icon;
+  width: 80%;
+  border-radius: 10px;
+  margin: auto;
+  border-radius: 10px;
+}
+
+.game-name {
+  grid-area: name;
+}
+
+.game-name * {
+  margin: 0;
+}
+
+.game-desc {
+  grid-area: desc;
+  font-size: 0.7em;
+  font-family: "Rubik Medium", Rubik, Roboto, sans-serif;
+  color: var(--fg);
+  font-weight: 500;
+  text-decoration: none !important;
+}
+
+.game-desc>div, .game-name>div {
+  /* display: inline-block; */
+  background: rgba(44, 44, 44, 0.5);
 }
 
 .subcontent {
@@ -251,14 +298,6 @@ img.header {
 .max {
   max-width: 100%;
   max-height: 100%;
-}
-
-.std-button{
-  display: inline-block;
-  padding: .5em;
-  border: solid white 2px;
-  background-color: red;
-  border-radius: 10px;
 }
 
 @media screen and (max-width: 60em) {
@@ -285,6 +324,7 @@ a:hover {
   font-family: "Rubik Mono One", Rubik, Roboto, sans-serif;
   font-size: 0.6em;
   margin-top: 1em;
+  border: solid black 2px;
 }
 
 .btn-red:hover {
@@ -324,6 +364,7 @@ a:hover {
   width: 100%;
   background-color: var(--csh-tertiary);
   color: white;
+  margin-top: 10px;
 }
 
 .feet-flex {
@@ -332,6 +373,11 @@ a:hover {
   justify-content: space-around;
   padding: 10px 0px;
   width: min(100%, 600px);
+}
+
+#feet-quote {
+  padding: 0;
+  padding-bottom: 5px;
 }
 
 .social>img {
@@ -353,7 +399,7 @@ a:hover {
     display: none;
   }
 
-  .card {
+  .card, .game-card {
     margin: 0.5em;
   }
 
