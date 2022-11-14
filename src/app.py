@@ -42,6 +42,7 @@ def uploadgame():
         f = flask.request.files['file']
         title = flask.request.form['title']
         description = flask.request.form['description']
+        author = current_user.uid
         file = {'file': ("game.zip", f.stream, "application/zip")}
         fields = {'title': title, 'description': description}
         r = requests.post(app.config["DEVCADE_API_URI"] + "games/upload", files=file, data=fields)
@@ -61,6 +62,17 @@ def uploadpage():
     except(Exception):
         print("api offline")
     return flask.render_template('upload.html', title='Devcade - Upload', gamelist=usergames)
+
+@app.route('/admin/delete/<id>')
+@login_required
+def deleteGame(id):
+    if(current_user.admin):
+        r = requests.post(app.config["DEVCADE_API_URI"] + "games/delete/" + id)
+        if r.status_code != 200:
+            return r.text
+    else:
+        return "<p>Stop hacking</p>"
+    return flask.redirect('/catalog')
 
 @app.errorhandler(Exception)
 def page404(e):
