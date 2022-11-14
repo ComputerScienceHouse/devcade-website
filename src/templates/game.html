@@ -6,7 +6,7 @@
 <p>{{ gamelist[game].description }}</p>
 {% if current_user.admin %}
 <div class="card-wrapper">
-  <a href='/admin/delete/{{ gamelist[game].id }}'><div class="std-button">Delete</div></a>
-  <div class="std-button">More Admin Stuff...</div>
+  <a href='/admin/delete/{{ gamelist[game].id }}'><div class="btn btn-red">Delete</div></a>
+  <div class="btn btn-red">More Admin Stuff...</div>
 </div>
 {% endif %} {% endblock %}

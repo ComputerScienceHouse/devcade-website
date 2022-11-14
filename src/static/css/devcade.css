@@ -24,7 +24,6 @@ body {
   width: 100%;
   min-height: 100vh;
   padding: 0 0;
-  padding-bottom: 2em;
   font-family: Rubik, Roboto, sans-serif;
   font-size: calc(10pt + 1vmin);
 }
@@ -253,14 +252,6 @@ img.header {
   max-height: 100%;
 }
 
-.std-button{
-  display: inline-block;
-  padding: .5em;
-  border: solid white 2px;
-  background-color: red;
-  border-radius: 10px;
-}
-
 @media screen and (max-width: 60em) {
   .card-wrapper {
     max-width: 100%;
@@ -285,6 +276,7 @@ a:hover {
   font-family: "Rubik Mono One", Rubik, Roboto, sans-serif;
   font-size: 0.6em;
   margin-top: 1em;
+  border: solid black 2px;
 }
 
 .btn-red:hover {
@@ -324,6 +316,7 @@ a:hover {
   width: 100%;
   background-color: var(--csh-tertiary);
   color: white;
+  margin-top: 10px;
 }
 
 .feet-flex {
@@ -332,6 +325,11 @@ a:hover {
   justify-content: space-around;
   padding: 10px 0px;
   width: min(100%, 600px);
+}
+
+#feet-quote{
+  padding: 0;
+  padding-bottom: 5px;
 }
 
 .social>img {

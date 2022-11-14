@@ -47,7 +47,7 @@ def uploadgame():
         fields = {'title': title, 'description': description, 'author':author}
         r = requests.post(app.config["DEVCADE_API_URI"] + "games/upload", files=file, data=fields)
         if r.status_code == 200:
-            return flask.redirect('/')
+            return flask.redirect('/catalog')
         return "<p>" + r.text + "</p>"
 
 @app.route('/upload')
@@ -66,7 +66,12 @@ def uploadpage():
 @app.route('/admin/delete/<id>')
 @login_required
 def deleteGame(id):
-    if(current_user.admin):
+    games = requests.get(app.config['DEVCADE_API_URI'] + "games/gamelist").json()
+    author = ""
+    for i in games:
+        if i['id'] == id:
+            author = i['author']
+    if(current_user.admin or current_user.id == author):
         r = requests.post(app.config["DEVCADE_API_URI"] + "games/delete/" + id)
         if r.status_code != 200:
             return r.text

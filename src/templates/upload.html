@@ -26,17 +26,18 @@
         </ol>
     </div>
 </div>
-    <h1>Your files:</h1>
-<div id="card-wrapper">
+    <h1>Your games:</h1>
+<div class="card-wrapper">
 {% for i in gamelist %}
-<a href="/game/i.id }}">
+<a href="/game/{{ i.id }}">
 <div class="card">
     <h2>{{ i.name }}</h2>
     <p>{{ i.author }}</p>
-    <img class="max" src="{{ url_for('static', filename='images/csh_tilted.png') }}" />
+    <img class="max" src="{{ i.iconLink }}" />
     <p>{{ i.desc }}</p>
     <p></p>
     <a class="btn btn-red" href="/edit/{{ i.id }}">Edit</a>
+    <a class="btn btn-red" href="/admin/delete/{{ i.id }}">Delete</a>
 </div>
 </a>
 {% endfor %}
