@@ -42,12 +42,12 @@ def uploadgame():
         f = flask.request.files['file']
         title = flask.request.form['title']
         description = flask.request.form['description']
-        author = current_user.uid
+        author = current_user.id
         file = {'file': ("game.zip", f.stream, "application/zip")}
-        fields = {'title': title, 'description': description}
+        fields = {'title': title, 'description': description, 'author':author}
         r = requests.post(app.config["DEVCADE_API_URI"] + "games/upload", files=file, data=fields)
-        # if r.status_code == 200:
-        #     return flask.redirect('/')
+        if r.status_code == 200:
+            return flask.redirect('/')
         return "<p>" + r.text + "</p>"
 
 @app.route('/upload')
