@@ -3,6 +3,8 @@ from werkzeug.utils import secure_filename
 from flask_login import login_required, current_user
 from auth import app
 import requests
+from io import BytesIO
+from werkzeug.wsgi import FileWrapper 
 
 @app.route('/')
 # @login_required
@@ -62,6 +64,13 @@ def uploadpage():
     except(Exception):
         print("api offline")
     return flask.render_template('upload.html', title='Devcade - Upload', gamelist=usergames)
+
+@app.route('/download/<id>')
+def download(id):
+    r = requests.get(app.config["DEVCADE_API_URI"] + "games/download/" + id, stream=True)
+    b = BytesIO(r.content)
+    game = FileWrapper(b)
+    return flask.Response(game, mimetype="application/zip", direct_passthrough=True)
 
 @app.route('/admin/delete/<id>')
 @login_required
