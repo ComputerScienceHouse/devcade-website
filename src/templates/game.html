@@ -1,7 +1,11 @@
 {% extends "header.html" %} {% block title %}Devcade - {{game.name}}
 {%endblock %} {% block content %}
 <div class="card-wrapper">{{ gamecard(game) }}</div>
+<div class="card-wrapper">
+  <a class="btn btn-red" href="/download/{{ game.id }}">Download Game</a>
+</div>
 {% if current_user.admin or current_user.id == game.author %}
+<h2>Admin stuff:</h2>
 <div class="card-wrapper">
   <a class="btn btn-red" href="/edit/{{ game.id }}">Edit</a>
   <a class="btn btn-red" href="/admin/delete/{{ game.id }}">Delete</a>
