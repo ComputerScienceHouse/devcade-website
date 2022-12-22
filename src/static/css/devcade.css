@@ -252,6 +252,7 @@ img.header {
   padding: 0.5em 5px;
   border-radius: 10px;
   background-size: cover;
+  background-position: center;
 }
 
 .game-icon {
