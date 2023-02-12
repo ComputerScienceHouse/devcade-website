@@ -11,10 +11,6 @@ from werkzeug.wsgi import FileWrapper
 def homepage():
     return flask.render_template('home.html')
 
-@app.route('/about')
-def aboutpage():
-    return flask.render_template('about.html')
-
 @app.route('/catalog')
 def catalogpage():
     games = requests.get(app.config["DEVCADE_API_URI"] + "games/gamelist").json()
