@@ -1,4 +1,5 @@
 {% macro gamecard(game) %}
+{% if game.author != "mstrodl" %}
 <a href="/game/{{ game.id }}">
   <div class="game-card" style="background-image: url({{ game.bannerLink }})">
     <img class="game-icon" src="{{ game.iconLink }}" />
@@ -11,6 +12,7 @@
     <div class="game-desc"><div>{{ game.description }}</div></div>
   </div>
 </a>
+{% endif %}
 {% endmacro %} {% block header %}
 <!DOCTYPE html>
 <html lang="en">
