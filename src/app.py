@@ -99,7 +99,7 @@ def page404(e):
         message = e.description
         eCode = e.code
     finally:
-        return flask.render_template('error.html', error=eCode, message=message)
+        return flask.render_template('error.html', error=eCode, message=message), eCode
 
 if __name__ == '__main__':
     app.run(host='localhost', debug=True)
