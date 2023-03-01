@@ -84,6 +84,12 @@ def deleteGame(id):
         return "<p>Stop hacking</p>"
     return flask.redirect('/catalog')
 
+@app.route("/sitemap.xml")
+@app.route("/robots.txt")
+@app.route("/favicon.ico")
+def static_from_root():
+    return flask.send_from_directory(app.static_folder, flask.request.path[1:])
+
 @app.errorhandler(Exception)
 def page404(e):
     eCode = 500
@@ -93,9 +99,7 @@ def page404(e):
         message = e.description
         eCode = e.code
     finally:
-        return flask.render_template('error.html', error=eCode, message=message)
+        return flask.render_template('error.html', error=eCode, message=message), eCode
 
 if __name__ == '__main__':
     app.run(host='localhost', debug=True)
-
-
