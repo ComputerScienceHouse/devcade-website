@@ -9,7 +9,7 @@ contributors = [
     },
     {
         "name" : "Noah Emke",
-        "link" : "",
+        "link" : "https://noahemke.com",
         "email" : hashlib.md5(b"mtft@csh.rit.edu").hexdigest(),
         "desc" : "Devcade Team Lead, Third Year GDD"
     },
@@ -51,13 +51,13 @@ contributors = [
     },
     {
         "name" : "Andrew Simonson",
-        "link" : "",
+        "link" : "https://asimonson.com",
         "email" : hashlib.md5(b"cinnamon@csh.rit.edu").hexdigest(),
         "desc" : "Public Site Developer, Third Year CS"
     },
     {
         "name" : "Ella Soccoli",
-        "link" : "",
+        "link" : "https://esoccoli.me",
         "email" : hashlib.md5(b"ella@csh.rit.edu").hexdigest(),
         "desc" : "Game Developer, First Year GDD"
     },
