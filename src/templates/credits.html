@@ -4,32 +4,23 @@
 <p>Many people have contributed to the different aspects of the Devcade project. Listed below (alphabetically) are the names of those who contributed to the core of the project</p>
 <div class="card-wrapper">
     {% for i in range(0,contributors|length) %}
-    <div class="game-card" style="background-image: url({{ url_for('static', filename='images/csh_tilted.png') }})">
-      <img class="game-icon" src="https://www.gravatar.com/avatar/{{ contributors[i].email }}" />
-      <div class="game-name">
-        <div>
-          <h2>{{ contributors[i].name }}</h2>
-          <h3></h3>
+    {% if contributors[i].link != "" %}
+    <a href="{{ contributors[i].link }}">
+    {% endif %}
+      <div class="game-card" style="background-image: url({{ url_for('static', filename='images/csh_tilted.png') }})">
+        <img class="game-icon" src="https://www.gravatar.com/avatar/{{ contributors[i].email }}?d=identicon" />
+        <div class="game-name">
+          <div>
+            <h2>{{ contributors[i].name }}</h2>
+            <h3></h3>
+          </div>
         </div>
+        <div class="game-desc"><div>{{ contributors[i].desc }}</div></div>
       </div>
-      <div class="game-desc"><div></div></div>
-    </div>
+    {% if contributors[i].link != "" %}
+    </a>
+    {% endif %}
   
     {% endfor %}
   </div>
-<ul>
-    <li>Andrew Ebersole</li>
-    <li>Noah Emke</li>
-    <li>Will Lyons</li>
-    <li>Wilson McDade</li>
-    <li>Willard Nilges</li>
-    <li>Joe O'Neil</li>
-    <li>Ben Piro</li>
-    <li>Dennis Santos Sanchez</li>
-    <li>Andrew Simonson</li>
-    <li>Ella Soccoli</li>
-    <li>Nathan Teall</li>
-    <li>Alex Vasilcoiu</li>
-    <li>Chris Wells</li>
-</ul>
 {% endblock %}

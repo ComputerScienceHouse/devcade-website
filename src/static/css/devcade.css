@@ -263,6 +263,14 @@ img.header {
   border-radius: 10px;
 }
 
+.game-icon {
+  grid-area: icon;
+  width: 80%;
+  border-radius: 10px;
+  margin: auto;
+  border-radius: 10px;
+}
+
 .game-name {
   grid-area: name;
 }
