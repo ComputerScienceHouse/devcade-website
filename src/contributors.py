@@ -27,7 +27,7 @@ contributors = [
     },
     {
         "name" : "Willard Nilges",
-        "link" : "",
+        "link" : "https://nilges.me/",
         "email" : hashlib.md5(b"wilnil@csh.rit.edu").hexdigest(),
         "desc" : "Backend Developer, Game Developer, Fifth Year CE"
     },
