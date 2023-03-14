@@ -5,6 +5,7 @@ from auth import app
 import requests
 from io import BytesIO
 from werkzeug.wsgi import FileWrapper 
+import contributors
 
 @app.route('/')
 # @login_required
@@ -89,6 +90,10 @@ def deleteGame(id):
 @app.route("/favicon.ico")
 def static_from_root():
     return flask.send_from_directory(app.static_folder, flask.request.path[1:])
+
+@app.route('/credits')
+def credits():
+    return flask.render_template('credits.html', contributors = contributors.contributors)
 
 @app.errorhandler(Exception)
 def page404(e):
