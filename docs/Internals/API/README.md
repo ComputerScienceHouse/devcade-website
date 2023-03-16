@@ -1,5 +1,13 @@
 # API
 
+The API is used to interact with the game library by the cabinet and the website. It requires a few resources:
+- S3 Buckets
+    - Game Images
+    - Game Saves
+- Databases
+    - Postgres
+        - For storing information about games
+
 - Download project and run `npm install`
 - Use `npm run dev` to start the development server.
 - If a `.env` file does not currently exist in the repo root directory, create one with:
