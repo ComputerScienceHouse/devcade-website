@@ -8,6 +8,8 @@ The API is used to interact with the game library by the cabinet and the website
     - Postgres
         - For storing information about games
 
+Source code can be found at: https://github.com/ComputerScienceHouse/devcade-api
+
 - Download project and run `npm install`
 - Use `npm run dev` to start the development server.
 - If a `.env` file does not currently exist in the repo root directory, create one with:
