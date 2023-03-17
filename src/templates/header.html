@@ -37,6 +37,16 @@
   <body onload="dropdown_init()">
     <div id="navBar">
       <div class="crate">
+
+        {% if config.DEVCADE_IS_DEV %}
+        <a href="/" class="title">
+          <img
+            style="height: 3em"
+            src="{{ url_for('static', filename='images/DevcadeDevLogoNoText.png') }}"
+          />
+          <h1>Devcade</h1>
+        </a>
+        {% else %}
         <a href="/" class="title">
           <img
             style="height: 3em"
@@ -44,7 +54,7 @@
           />
           <h1>Devcade</h1>
         </a>
-
+        {% endif %}
         <div class="dropdown-toggle">
           <img
             src="{{ url_for('static', filename='icons/picklist.svg') }}"
