@@ -12,6 +12,7 @@ PORT = env.get('PORT', 8080)
 SERVER_NAME = env.get('SERVER_NAME', 'localhost:5000')
 PREFERRED_URL_SCHEME = env.get('PREFERRED_URL_SCHEME', 'https')
 
+# For the UsersDB
 POSTGRESQL_USER = env.get('POSTGRESQL_USER', '')
 POSTGRESQL_PASSWORD = env.get('POSTGRESQL_PASSWORD')
 POSTGRESQL_DATABASE = env.get('POSTGRESQL_DATABASE', 'usersDB')
@@ -21,9 +22,6 @@ SQLALCHEMY_DATABASE_URI = env.get(
 if POSTGRESQL_USER == '':
     SQLALCHEMY_DATABASE_URI = 'sqlite:///users.sqlite3'
 SQLALCHEMY_TRACK_MODIFICATIONS = 'False'
-
-AWS_ACCESS_KEY_ID = env.get('AWS_ACCESS_KEY_ID', '')
-AWS_SECRET_ACCESS_KEY = env.get('AWS_SECRET_ACCESS_KEY', '')
 
 # OpenID Connect SSO config CSH
 OIDC_ISSUER = env.get('OIDC_ISSUER', 'https://sso.csh.rit.edu/auth/realms/csh')
