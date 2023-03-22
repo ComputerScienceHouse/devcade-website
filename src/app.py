@@ -41,7 +41,7 @@ def uploadgame():
         author = current_user.id
         file = {'file': ("game.zip", f.stream, "application/zip")}
         fields = {'title': title, 'description': description, 'author':author}
-        r = requests.post(app.config["DEVCADE_API_URI"] + "games/", files=file, data=fields)
+        r = requests.post(app.config["DEVCADE_API_URI"] + "games/", files=file, data=fields, headers={"frontend_api_key":app.config["FRONTEND_API_KEY"]})
         if r.status_code == 200:
             return flask.redirect('/catalog')
         return "<p>" + r.text + "</p>"
@@ -72,7 +72,7 @@ def deleteGame(id):
     game = requests.get(app.config['DEVCADE_API_URI'] + "games/" + id).json()
     author = game['author']
     if(current_user.admin or current_user.id == author):
-        r = requests.delete(app.config["DEVCADE_API_URI"] + "games/" + id)
+        r = requests.delete(app.config["DEVCADE_API_URI"] + "games/" + id, headers={"frontend_api_key":app.config["FRONTEND_API_KEY"]})
         if r.status_code != 200:
             return r.text
     else:
