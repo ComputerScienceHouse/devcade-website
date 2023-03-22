@@ -1,6 +1,10 @@
 # devcade-website
 Front-end for the Devcade website that allows members to view the game catalog and upload games.
 
+Requires a database for storing session information. The goal of the userDB was to keep track of user data that we might add to the site at a later time. It is not currently used.
+
+Source code can be found at https://github.com/ComputerScienceHouse/devcade-website
+
 # How to Run
 `pip3 install -r requirements.txt`
 
