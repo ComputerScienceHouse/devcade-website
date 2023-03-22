@@ -105,7 +105,7 @@ From the onboard directory, initialize the xlogin submodule by running:
     git submodule update --init --recursive
 
 To build the onboard program and put it in the correct place, run
-<!-- TODO Update idiot naming →
+<!-- TODO Update idiot naming -->
 ./idiot/update_onboard.sh
 cp idiot/.xinitrc /home/devcade
 mkdir -p /home/devcade/.config/openbox && cp idiot/rc.xml /home/devcade/.config/openbox
