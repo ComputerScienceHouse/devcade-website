@@ -14,7 +14,7 @@ def homepage():
 
 @app.route('/catalog')
 def catalogpage():
-    games = requests.get(app.config["DEVCADE_API_URI"] + "games/gamelist").json()
+    games = requests.get(app.config["DEVCADE_API_URI"] + "games/").json()
     return flask.render_template('catalog.html', gamelist=games)
 
 @app.route('/user')
@@ -26,13 +26,10 @@ def user():
 
 @app.route('/game/<id>')
 def getgame(id):
-    games = requests.get(app.config["DEVCADE_API_URI"] + "games/gamelist").json()
-    for i in range(len(games)):
-        if games[i]['id'] == id:
-            break
-    else:
+    game_req = requests.get(app.config["DEVCADE_API_URI"] + f"games/{id}")
+    if game_req.status_code == 404:
         flask.render_template('404.html')
-    return flask.render_template('game.html', game=games[i])
+    return flask.render_template('game.html', game=game_req.json())
 
 @app.route('/upload_game', methods = ['POST'])
 @login_required
@@ -44,7 +41,7 @@ def uploadgame():
         author = current_user.id
         file = {'file': ("game.zip", f.stream, "application/zip")}
         fields = {'title': title, 'description': description, 'author':author}
-        r = requests.post(app.config["DEVCADE_API_URI"] + "games/upload", files=file, data=fields)
+        r = requests.post(app.config["DEVCADE_API_URI"] + "games/", files=file, data=fields, headers={"frontend_api_key":app.config["FRONTEND_API_KEY"]})
         if r.status_code == 200:
             return flask.redirect('/catalog')
         return "<p>" + r.text + "</p>"
@@ -54,7 +51,7 @@ def uploadgame():
 def uploadpage():
     usergames = []
     try:
-        games = requests.get(app.config["DEVCADE_API_URI"] + "games/gamelist").json()
+        games = requests.get(app.config["DEVCADE_API_URI"] + "games/").json()
         for i in games:
             if i['author'] == current_user.id:
                 usergames.append(i)
@@ -64,7 +61,7 @@ def uploadpage():
 
 @app.route('/download/<id>')
 def download(id):
-    r = requests.get(app.config["DEVCADE_API_URI"] + "games/download/" + id, stream=True)
+    r = requests.get(app.config["DEVCADE_API_URI"] + f"games/{id}/game", stream=True)
     b = BytesIO(r.content)
     game = FileWrapper(b)
     return flask.Response(game, mimetype="application/zip", direct_passthrough=True)
@@ -72,13 +69,10 @@ def download(id):
 @app.route('/admin/delete/<id>')
 @login_required
 def deleteGame(id):
-    games = requests.get(app.config['DEVCADE_API_URI'] + "games/gamelist").json()
-    author = ""
-    for i in games:
-        if i['id'] == id:
-            author = i['author']
+    game = requests.get(app.config['DEVCADE_API_URI'] + "games/" + id).json()
+    author = game['author']
     if(current_user.admin or current_user.id == author):
-        r = requests.post(app.config["DEVCADE_API_URI"] + "games/delete/" + id)
+        r = requests.delete(app.config["DEVCADE_API_URI"] + "games/" + id, headers={"frontend_api_key":app.config["FRONTEND_API_KEY"]})
         if r.status_code != 200:
             return r.text
     else:

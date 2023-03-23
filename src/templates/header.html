@@ -1,7 +1,7 @@
 {% macro gamecard(game) %}
-<a href="/game/{{ game.id }}">
-  <div class="game-card" style="background-image: url({{ game.bannerLink }})">
-    <img class="game-icon" src="{{ game.iconLink }}" />
+<a href="/game/{{ game.game_id }}">
+	<div class="game-card" style="background-image: url({{ config['DEVCADE_API_URI'] }}games/{{ game.game_id }}/banner)">
+		<img class="game-icon" src="{{ config['DEVCADE_API_URI'] }}games/{{ game.game_id }}/icon" />
     <div class="game-name">
       <div>
         <h2>{{ game.name }}</h2>

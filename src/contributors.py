@@ -78,5 +78,11 @@ contributors = [
         "link" : "",
         "email" : hashlib.md5(b"chrisp@csh.rit.edu").hexdigest(),
         "desc" : "Hardware Team, First Year GDD"
+    },
+    {
+        "name" : "Joe Abbate",
+        "link" : "https://joeabbate.me",
+        "email" : hashlib.md5(b"skyz@csh.rit.edu").hexdigest(),
+        "desc" : "Lead Security Engineer, Third Year Cyber Security"
     }
 ]

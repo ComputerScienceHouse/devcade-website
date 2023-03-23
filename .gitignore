@@ -4,3 +4,4 @@ envs.py
 venv/
 users.sqlite3
 launch.json
+.env
