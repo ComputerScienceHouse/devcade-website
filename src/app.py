@@ -53,7 +53,7 @@ def uploadpage():
     try:
         games = requests.get(app.config["DEVCADE_API_URI"] + "games/").json()
         for i in games:
-            if i['author'] == current_user.id:
+            if i['author_username'] == current_user.id:
                 usergames.append(i)
     except(Exception):
         print("api offline")
@@ -70,7 +70,7 @@ def download(id):
 @login_required
 def deleteGame(id):
     game = requests.get(app.config['DEVCADE_API_URI'] + "games/" + id).json()
-    author = game['author']
+    author = game['author_username']
     if(current_user.admin or current_user.id == author):
         r = requests.delete(app.config["DEVCADE_API_URI"] + "games/" + id, headers={"frontend_api_key":app.config["FRONTEND_API_KEY"]})
         if r.status_code != 200:
