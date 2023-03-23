@@ -16,7 +16,12 @@ current_user.is_authenticated %}
         placeholder="Description (max 1500 chars)"
         name="description"
       ></textarea>
-      <input type="file" name="file" accept=".zip" />
+      <label for="game">Game Zip</label>
+      <input type="file" name="game" accept=".zip" />
+      <label for="banner">Banner Image</label>
+      <input type="file" name="banner" accept="*" />
+      <label for="icon">Icon Image</label>
+      <input type="file" name="icon" accept="*" />
       <input class="btn btn-red" id="apply" value="Upload" type="submit" />
     </form>
   </div>
