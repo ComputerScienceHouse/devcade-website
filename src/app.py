@@ -42,7 +42,7 @@ def uploadgame():
         file = {'file': ("game.zip", f.stream, "application/zip")}
         fields = {'title': title, 'description': description, 'author':author}
         r = requests.post(app.config["DEVCADE_API_URI"] + "games/", files=file, data=fields, headers={"frontend_api_key":app.config["FRONTEND_API_KEY"]})
-        if r.status_code == 200:
+        if r.status_code == 201:
             return flask.redirect('/catalog')
         return "<p>" + r.text + "</p>"
 
