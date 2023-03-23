@@ -16,12 +16,13 @@ def csh_user_auth(func):
         groups = flask.session["userinfo"].get("groups", [])
         is_eboard = "eboard" in groups
         is_rtp = "rtp" in groups
+        is_devcade_admin = "devcade" in groups
         auth_dict = {
             "uid": uid,
             "first": first,
             "last": last,
             "picture": picture,
-            "admin": is_eboard or is_rtp or uid == "cinnamon"
+            "admin": is_eboard or is_rtp or is_devcade_admin
         }
         kwargs["auth_dict"] = auth_dict
         return func(*args, **kwargs)
