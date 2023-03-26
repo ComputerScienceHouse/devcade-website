@@ -35,11 +35,17 @@ def getgame(id):
 @login_required
 def uploadgame():
     if flask.request.method == 'POST':
-        f = flask.request.files['file']
+        game = flask.request.files['game']
+        banner = flask.request.files['banner']
+        icon = flask.request.files['icon']
         title = flask.request.form['title']
         description = flask.request.form['description']
         author = current_user.id
-        file = {'file': ("game.zip", f.stream, "application/zip")}
+        file = {
+            'game': ("game.zip", game.stream, "application/zip"),
+            'banner': ("banner", banner.stream, banner.mimetype),
+            'icon': ("icon", icon.stream, icon.mimetype)
+        }
         fields = {'title': title, 'description': description, 'author':author}
         r = requests.post(app.config["DEVCADE_API_URI"] + "games/", files=file, data=fields, headers={"frontend_api_key":app.config["FRONTEND_API_KEY"]})
         if r.status_code == 201:
@@ -53,7 +59,7 @@ def uploadpage():
     try:
         games = requests.get(app.config["DEVCADE_API_URI"] + "games/").json()
         for i in games:
-            if i['author_username'] == current_user.id:
+            if i['author'] == current_user.id:
                 usergames.append(i)
     except(Exception):
         print("api offline")
@@ -70,7 +76,7 @@ def download(id):
 @login_required
 def deleteGame(id):
     game = requests.get(app.config['DEVCADE_API_URI'] + "games/" + id).json()
-    author = game['author_username']
+    author = game['author']
     if(current_user.admin or current_user.id == author):
         r = requests.delete(app.config["DEVCADE_API_URI"] + "games/" + id, headers={"frontend_api_key":app.config["FRONTEND_API_KEY"]})
         if r.status_code != 200:
