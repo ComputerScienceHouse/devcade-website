@@ -93,6 +93,17 @@ u {
   background-color: var(--bg);
 }
 
+#alertBar {
+  position: absolute;
+  top: 3em;
+  left: 0;
+  height: 3em;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  background-color: var(--csh-secondary);
+}
+
 #nav {
   align-items: center;
   color: white;
@@ -159,6 +170,7 @@ img.header {
 
 #bg {
   height: min(100vh, 400px);
+  margin-top: 3em;
 }
 
 .dropdown-toggle {
@@ -198,6 +210,23 @@ img.header {
     "c"
     "b"
     "e";
+}
+
+#gamejam-flyer-wrapper {
+  grid-area: a;
+  width: 100%;
+}
+
+#more-details-wrapper {
+  grid-area: c;
+}
+
+#gamejam-details-wrapper {
+  grid-area: d;
+}
+
+#about-gamejam-wrapper {
+  grid-area: b;
 }
 
 #about-devcade-wrapper {
