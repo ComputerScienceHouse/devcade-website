@@ -104,10 +104,15 @@ u {
   background-color: var(--csh-secondary);
 }
 
+#alertBar > h1 {
+  margin-top: 0px;
+}
+
 #nav {
   align-items: center;
   color: white;
   width: 100%;
+  margin-top: 3em;
 }
 
 #nav .show {
@@ -451,6 +456,14 @@ a:hover {
       "b a"
       "c a"
       "e e";
+  }
+  
+  #alertBar > h1 {
+    margin-top: 20px;
+  }
+
+  #nav {
+    margin-top: 0px;
   }
 
   .navbar-toggler-icon {
