@@ -212,16 +212,27 @@ img.header {
     "e";
 }
 
-#gamejam-flyer-wrapper {
-  grid-area: a;
+#gamejamGrid {
+  display: grid;
+  grid-gap: 1em 1em;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto;
+  grid-template-areas:
+    "a"
+    "d"
+    "c"
+    "b"
+    "e";
 }
 
-#more-details-wrapper {
-  grid-area: c;
+#gamejam-flyer-wrapper {
+  grid-area: a;
+  display: flex;
+  align-items: center;
 }
 
 #gamejam-details-wrapper {
-  grid-area: d;
+  grid-area: c;
 }
 
 #about-gamejam-wrapper {
@@ -431,6 +442,15 @@ a:hover {
       "a b"
       "a d"
       "c e";
+  }
+
+  #gamejamGrid {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto auto auto;
+    grid-template-areas:
+      "b a"
+      "c a"
+      "e e";
   }
 
   .navbar-toggler-icon {

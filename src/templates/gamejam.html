@@ -1,7 +1,7 @@
 {% extends "header.html" %} {% block headertext %}{%endblock%}
 {% block content %}
 
-<div id="homeGrid">
+<div id="gamejamGrid">
     <div id="gamejam-flyer-wrapper" class="subcontent">
         <a href="{{ url_for('static', filename='files/GamejamFlyer.pdf') }}">
             <img style="width: 100%" src="{{ url_for('static', filename='images/GamejamFlyer.png') }}">
@@ -10,9 +10,9 @@
     <div id="about-gamejam-wrapper" class="subcontent">
         <h2>About the Gamejam</h2>
         <p>
-            The Devcade team is hosting a week-long gamejam at <a href="https://www.rit.edu/magic/">
+            The Devcade team is hosting a week-long gamejam at <a target="_blank" href="https://www.rit.edu/magic/">
             RIT's MAGIC Center</a>! The event is open to all RIT students, regardless of major, 
-            and will consist of working sessions, workshops, and seminars.
+            and will consist of in-person working sessions, workshops, and seminars.
         </p>
         <p>
             You're encouraged to think outside of the box with your game! Some existing Devcade games include 
@@ -21,14 +21,14 @@
         </p>
         <p>
             Food will be provided for all in-person work sessions. Please fill out the below interst form if you 
-            plan on attending and have dietary restrictions.
+            plan on attending to let us know of any dietary restrictions you may have.
         </p>
         <p>
             There are $700 of prizes available to win, including an <i>Elgato StreamDeck+, Raspberry Pi 4Bs, 
             a Wacom Drawing Tablet, Visa Prepaid Gift Cards, and many more</i>!
         </p>
         <p></p>
-        <a class="btn btn-red" href="https://forms.gle/hkzAfMA8CDTy2Cn18">Interested in participating?</a>
+        <a class="btn btn-red" target="_blank" href="https://forms.gle/hkzAfMA8CDTy2Cn18">Interested in participating?</a>
     </div>
     <div id="gamejam-details-wrapper" class="subcontent">
         <h2>What do I need to know before attending?</h2>
@@ -39,8 +39,8 @@
         </p>
         <p>
             All participants are required to build their games using either the 
-            <a href="https://www.monogame.net/">Monogame</a> framework (C#) or the
-            <a href="https://bevyengine.org/">Bevy</a> engine (Rust). We will be presenting (and recording)
+            <a target="_blank" href="https://www.monogame.net/">Monogame</a> framework (C#) or the
+            <a target="_blank" href="https://bevyengine.org/">Bevy</a> engine (Rust). We will be presenting (and recording)
             seminars on the fundamentals and build processes of both.
         </p>
     </div>
