@@ -16,4 +16,4 @@ The cause for this issue is currently presumed to be that the control boards wer
 
 ### Fixes:
 
-Simply unplugging and plugging back in the controller boards will fix it temporarily untill the system is rebooted. The permanant fix is to hold down the A1 button while rebooting the system. This sets it into PS3 mode and it should remember this through future reboots. 
+Simply unplugging and plugging back in the controller boards will fix it temporarily untill the system is rebooted. The permanant fix is to hold down the A1 button while unplugging and plugging back in the boards. This sets it into PS3 mode and it seems like it should remember this through future reboots. 
