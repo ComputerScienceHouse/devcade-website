@@ -1,7 +1,9 @@
-from init import app, auth, db
-from models import Users
+from init import app, auth
+from models import User
 from flask_login import login_user, logout_user, LoginManager
 import flask
+import requests
+import sys
 
 from functools import wraps
 
@@ -19,10 +21,33 @@ def csh_user_auth(func):
         is_devcade_admin = "devcade" in groups
         auth_dict = {
             "uid": uid,
+            "user_type": "CSH",
             "first": first,
             "last": last,
+            "email": f"{uid}@csh.rit.edu",
             "picture": picture,
-            "admin": is_eboard or is_rtp or is_devcade_admin
+            "admin": any(is_eboard, is_rtp, is_devcade_admin)
+        }
+        kwargs["auth_dict"] = auth_dict
+        return func(*args, **kwargs)
+    return wrapped_function
+
+def google_user_auth(func):
+    @wraps(func)
+    def wrapped_function(*args, **kwargs):
+        uid = str(flask.session["userinfo"].get("sub", ""))
+        last = str(flask.session["userinfo"].get("family_name", ""))
+        first = str(flask.session["userinfo"].get("given_name", ""))
+        email = str(flask.session["userinfo"].get("email", ""))
+        picture = str(flask.session["userinfo"].get("picture", ""))
+        auth_dict = {
+            "uid": uid,
+            "user_type": "GOOGLE",
+            "first": first,
+            "last": last,
+            "email": email,
+            "picture": picture,
+            "admin": False
         }
         kwargs["auth_dict"] = auth_dict
         return func(*args, **kwargs)
@@ -30,14 +55,15 @@ def csh_user_auth(func):
 
 login_manager = LoginManager()
 login_manager.init_app(app)
-login_manager.login_view = 'csh_auth'
-
+login_manager.login_view = 'homepage'
 
 @login_manager.user_loader
 def load_user(user_id):
-    q = Users.query.get(user_id)
-    if q:
-        return q
+    user_req = requests.get(app.config["DEVCADE_API_URI"] + "users/" + user_id)
+    if user_req.status_code == 200:
+        user_data = user_req.json()
+        user = User(user_data['id'], user_data['user_type'], user_data['first_name'], user_data['last_name'], user_data['email'], user_data['picture'], user_data['admin'])
+        return user
     return None
 
 
@@ -49,7 +75,6 @@ def _logout():
 
 
 @app.route('/csh_auth')
-@app.route('/login')
 @auth.oidc_auth('default')
 @csh_user_auth
 def csh_auth(auth_dict=None):
@@ -58,18 +83,44 @@ def csh_auth(auth_dict=None):
     """
     if auth_dict is None:
         return flask.redirect("/csh_auth")
-    user = Users.query.get(auth_dict['uid'])
-    if user is not None:
-        user.firstname = auth_dict['first']
-        user.lastname = auth_dict['last']
-        user.picture = auth_dict['picture']
-        user.admin = auth_dict['admin']
+    return update_backend_user(auth_dict)
+
+@app.route('/google_auth')
+@auth.oidc_auth('google')
+@google_user_auth
+def google_auth(auth_dict=None):
+    """
+    Gets new logger inner data
+    """
+    if auth_dict is None:
+        return flask.redirect("/google_auth")
+    return update_backend_user(auth_dict)
+
+
+def update_backend_user(auth_dict):
+    # headers={"frontend_api_key":app.config["FRONTEND_API_KEY"]}
+    user_req = requests.get(app.config["DEVCADE_API_URI"] + "users/" + auth_dict['uid'])
+    if user_req.status_code == 400:
+        requests.post(app.config["DEVCADE_API_URI"] + "users/", json={
+            'id': auth_dict['uid'],
+            'user_type': auth_dict['user_type'],
+            'first_name': auth_dict['first'],
+            'last_name': auth_dict['last'],
+            'picture': auth_dict['picture'],
+            'email': auth_dict['email'],
+            'admin': auth_dict['admin']
+        }, headers={"frontend_api_key":app.config["FRONTEND_API_KEY"]})
     else:
-        user = Users(auth_dict['uid'], auth_dict['first'],
-                    auth_dict['last'], auth_dict['picture'], auth_dict['admin'])
-        db.session.add(user)
-    db.session.commit()
-    login_user(user)
+        requests.put(app.config["DEVCADE_API_URI"] + "users/" + auth_dict['uid'], json={
+            'id': auth_dict['uid'],
+            'user_type': auth_dict['user_type'],
+            'first_name': auth_dict['first'],
+            'last_name': auth_dict['last'],
+            'picture': auth_dict['picture'],
+            'email': auth_dict['email'],
+            'admin': auth_dict['admin']
+        }, headers={"frontend_api_key":app.config["FRONTEND_API_KEY"]})
+    login_user(User(auth_dict['uid'], auth_dict['user_type'], auth_dict['first'], auth_dict['last'], auth_dict['email'], auth_dict['picture'], auth_dict['admin']))
     goto = flask.request.args.get('goto')
     if goto == None:
         goto = 'homepage'
@@ -78,7 +129,3 @@ def csh_auth(auth_dict=None):
     except:
         goto = flask.url_for('homepage')
     return flask.redirect(goto)
-
-
-with app.app_context():
-        db.create_all()

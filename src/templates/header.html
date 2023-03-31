@@ -5,7 +5,11 @@
     <div class="game-name">
       <div>
         <h2>{{ game.name }}</h2>
+        {% if game.user.user_type == "CSH" %}
         <h3>{{ game.author }}</h3>
+        {% else %}
+        <h3>{{ game.user.email.split('@')[0] }}</h3>
+        {% endif %}
       </div>
     </div>
     <div class="game-desc"><div>{{ game.description }}</div></div>
@@ -95,8 +99,11 @@
             </div>
             <div class="dropdown-menu dropped hidden">
               <!-- <div class="dropdown-divider"></div> -->
-              <a class="dropdown-item" href="/login?goto={{ request.endpoint }}"
-                >Log in</a
+              <a class="dropdown-item" href="/csh_auth?goto={{ request.endpoint }}"
+                >Log In With CSH</a
+              >
+              <a class="dropdown-item" href="/google_auth?goto={{ request.endpoint }}"
+                >Log In With RIT</a
               >
             </div>
           </div>

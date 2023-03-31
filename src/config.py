@@ -22,13 +22,14 @@ if POSTGRESQL_USER == '':
     SQLALCHEMY_DATABASE_URI = 'sqlite:///users.sqlite3'
 SQLALCHEMY_TRACK_MODIFICATIONS = 'False'
 
-AWS_ACCESS_KEY_ID = env.get('AWS_ACCESS_KEY_ID', '')
-AWS_SECRET_ACCESS_KEY = env.get('AWS_SECRET_ACCESS_KEY', '')
-
 # OpenID Connect SSO config CSH
 OIDC_ISSUER = env.get('OIDC_ISSUER', 'https://sso.csh.rit.edu/auth/realms/csh')
 OIDC_CLIENT_ID = env.get('OIDC_CLIENT_ID', 'devcade')
 OIDC_CLIENT_SECRET = env.get('OIDC_CLIENT_SECRET', 'NOT-A-SECRET')
+
+GOOGLE_OIDC_ISSUER = env.get('GOOGLE_OIDC_ISSUER', 'https://sso.csh.rit.edu/auth/realms/csh')
+GOOGLE_OIDC_CLIENT_ID = env.get('GOOGLE_OIDC_CLIENT_ID', 'devcade')
+GOOGLE_OIDC_CLIENT_SECRET = env.get('GOOGLE_OIDC_CLIENT_SECRET', 'NOT-A-SECRET')
 
 DEVCADE_API_URI = env.get('DEVCADE_API_URI')
 FRONTEND_API_KEY = env.get('FRONTEND_API_KEY')
