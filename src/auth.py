@@ -26,7 +26,7 @@ def csh_user_auth(func):
             "last": last,
             "email": f"{uid}@csh.rit.edu",
             "picture": picture,
-            "admin": any(is_eboard, is_rtp, is_devcade_admin)
+            "admin": any((is_eboard, is_rtp, is_devcade_admin))
         }
         kwargs["auth_dict"] = auth_dict
         return func(*args, **kwargs)
