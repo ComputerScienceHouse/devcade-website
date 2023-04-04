@@ -99,6 +99,10 @@ def credits():
 def gamejam():
     return flask.render_template('gamejam.html')
 
+@app.route('/preseed')
+def preseed():
+    return flask.send_file("static/files/preseed.txt")
+
 @app.errorhandler(Exception)
 def page404(e):
     eCode = 500

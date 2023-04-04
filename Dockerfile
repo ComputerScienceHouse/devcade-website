@@ -11,5 +11,8 @@ COPY . .
 
 WORKDIR /app/src
 
+# Get the latest preseed and serve it
+RUN curl 'https://raw.githubusercontent.com/ComputerScienceHouse/Devcade-onboard/main/idiot/preseed.txt' > /app/src/static/files/preseed.txt
+
 CMD [ "gunicorn", "--bind", "0.0.0.0:8080", "app:app"]
 # CMD ["python3", "app.py"]
