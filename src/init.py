@@ -21,12 +21,18 @@ CSH_AUTH = ProviderConfiguration(issuer=app.config["OIDC_ISSUER"],
                                  client_metadata=ClientMetadata(
                                      app.config["OIDC_CLIENT_ID"],
                                      app.config["OIDC_CLIENT_SECRET"]))
-auth = OIDCAuthentication({'default': CSH_AUTH},
-                          app)
+GOOGLE_AUTH = ProviderConfiguration(issuer=app.config["GOOGLE_OIDC_ISSUER"],
+                                 client_metadata=ClientMetadata(
+                                     app.config["GOOGLE_OIDC_CLIENT_ID"],
+                                     app.config["GOOGLE_OIDC_CLIENT_SECRET"]),
+                                 auth_request_params={'scope': ['email', 'profile', 'openid']})
+auth = OIDCAuthentication(
+    {
+        'default': CSH_AUTH,
+        'google': GOOGLE_AUTH
+    },
+    app
+)
 
 auth.init_app(app)
 app.secret_key = os.urandom(16)
-
-# DB
-db = SQLAlchemy(app)
-migrate = Migrate(app, db)
