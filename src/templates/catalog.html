@@ -2,7 +2,7 @@
 block content %}
 <div class="card-wrapper">
   {% for i in range(0,gamelist|length) %}
-  {% if gamelist[i].id != "31cb96a8-b061-4381-a433-dd78550d4b3c" %}
+  {% if "CSH Only" not in gamelist[i].tags|map(attribute="name") or current_user.user_type == "CSH" %}
   {{ gamecard(gamelist[i]) }}
   {% endif %}
   {% endfor %}
