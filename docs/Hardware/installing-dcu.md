@@ -1,13 +1,14 @@
-# Setting up a new cabinet
+# Setting Up a New Cabinet
 
-- [Summary](#Summary)
-- [Booting Up](#Booting Up)
-  - [BIOS](#BIOS)
-  - [UEFI](#UEFI)
-- [The Preseed File](#The Preseed File)
-- [Installation Components](#Installation Components)
-- [Booting the Installer](#Booting the Installer)
-- [Configuration and Setup](#Configuration and Setup)
+## Table of Contents
+- [Summary](#summary)
+- [Booting Up](#booting-up)
+  - [BIOS](#bios)
+  - [UEFI](#uefi)
+- [The Preseed File](#the-preseed-file)
+- [Installation Components](#installation-components)
+- [Booting the Installer](#booting-the-installer)
+- [Configuration and Setup](#configuration-and-setup)
 
 ## Summary
 
