@@ -1,14 +1,27 @@
 # Setting up a new cabinet
 
+- [Summary](#Summary)
+- [Booting Up](#Booting Up)
+  - [BIOS](#BIOS)
+  - [UEFI](#UEFI)
+- [The Preseed File](#The Preseed File)
+- [Installation Components](#Installation Components)
+- [Booting the Installer](#Booting the Installer)
+- [Configuration and Setup](#Configuration and Setup)
+
+## Summary
+
 The Devcade project should theoretically run on just about any linux distro if set up properly. Our distro of choice is Debian 11.
 
-We now take advantage of Debian's preseed functionality. Our preseed file is located at https://devcade.csh.rit.edu/preseed.txt and is based off of the file given as an example in the [Debian Wiki](https://wiki.debian.org/DebianInstaller/Preseed).
+We now take advantage of Debian's preseed functionality to install the OS, and set up our launcher, [devcade-onboard](https://github.com/computersciencehouse/devcade-onboard). Our preseed file is located at https://devcade.csh.rit.edu/preseed.txt and is based off of the file given as an example in the [Debian Wiki](https://wiki.debian.org/DebianInstaller/Preseed).
 
 Devcade and its games ought to run on nearly any x86 hardware released in the last 10 years, but we recommend:
 
 **CPU:** Intel Core i5 (5th gen or better)
 **RAM:** 8GB
 **GPU:** ¯\\_(ツ)_/¯
+
+## Booting Up
 
 To begin, download a copy of [Debian Bullseye](https://mirrors.rit.edu/debian/debian-cd/11.6.0/amd64/iso-cd/debian-11.6.0-amd64-netinst.iso). Flash it onto a USB drive and boot from it. **Make sure to have the machine connected to the internet.** If you can, add a DHCP entry.
 
@@ -18,7 +31,7 @@ When you see the GRUB screen, you will need to supply the URL of our preseed fil
 
 If booting with BIOS, simply press `esc` and type `auto url=https://devcade.csh.rit.edu/preseed.txt`. 
 
-## UEFI
+### UEFI
 
 If using UEFI, enter `Advanced Options`, select `Automated Install`, press `e`, and move down to the line that starts with `linux`, and at the end of the line, add `auto url=https://devcade.csh.rit.edu/preseed.txt`. Press `^X` to boot.
 
@@ -30,7 +43,7 @@ The preseed file is simply a list of pre-selections for the debian installer. It
 
 The preseed file installs the ssh-server, along with the following individual packages: `xinit xterm git build-essential wget openbox compton pulseaudio x11-xserver-utils`. 
 
-The devcade launcher runs as an X11 application in Openbox, and runs Compton and pulseaudio. There are also some useful build utilities.
+[devcade-onboard](https://github.com/computersciencehouse/devcade-onboard) runs as an X11 application in Openbox, and runs Compton and pulseaudio. There are also some useful build utilities.
 
 Apart from that, there are a number of auxiliary files:
 
