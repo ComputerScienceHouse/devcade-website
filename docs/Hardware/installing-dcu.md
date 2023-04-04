@@ -1,175 +1,68 @@
+# Setting up a new cabinet
 
-# Setting up a Devcade cabinet
+- [Summary](#Summary)
+- [Booting Up](#Booting Up)
+  - [BIOS](#BIOS)
+  - [UEFI](#UEFI)
+- [The Preseed File](#The Preseed File)
+- [Installation Components](#Installation Components)
+- [Booting the Installer](#Booting the Installer)
+- [Configuration and Setup](#Configuration and Setup)
 
-## Table of Contents
-- [Installing an OS](#installing-debian-11)
-- [Network Configuration](#configuring-network)
-- [APT Configuration](#fixing-apt)
-	- [Sources](#sources-list)
-	- [Packages](#package-setup)
-	- [Dotnet](#dotnet-sdk)
-- [Misc Setup](#other-misc-setup)
-- [Devcade Onboard Setup](#installing-onboard)
-	- [Clone](#clone-the-repo)
-	- [Environment](#environment-vars)
-	- [Daemons](#summoning-daemons)
-- [X setup](#x-setup)
-	- [.xinitrc](#xinitrc)
-	- [Xinput](#xinput)
-- [Pulseaudio](#pulseaudio-setup)
-- [Daemons](#arcane-daemonology)
+## Summary
 
+The Devcade project should theoretically run on just about any linux distro if set up properly. Our distro of choice is Debian 11.
 
-## Installing Debian 11
+We now take advantage of Debian's preseed functionality to install the OS, and set up our launcher, [devcade-onboard](https://github.com/computersciencehouse/devcade-onboard). Our preseed file is located at https://devcade.csh.rit.edu/preseed.txt and is based off of the file given as an example in the [Debian Wiki](https://wiki.debian.org/DebianInstaller/Preseed).
 
-The Devcade project should theoretically run on just about any linux distro if set up properly. Our distro of choice for this guide will be Debian 11. Boot to the installer and proceed installing normally except for the following settings:
+Devcade and its games ought to run on nearly any x86 hardware released in the last 10 years, but we recommend:
 
-- User: `devcade`
-- Force UEFI Mode
-- Use Entire Disk
-- Everything on 1 partition
+**CPU:** Intel Core i5 (5th gen or better)
+**RAM:** 8GB
+**GPU:** ¯\\_(ツ)_/¯
 
-## Configuring Network
+## Booting Up
 
-Get MAC address and other info with `ip a`
+To begin, download a copy of [Debian Bullseye](https://mirrors.rit.edu/debian/debian-cd/11.6.0/amd64/iso-cd/debian-11.6.0-amd64-netinst.iso). Flash it onto a USB drive and boot from it. **Make sure to have the machine connected to the internet.** If you can, add a DHCP entry.
 
-Other network configurations will depend on your specific network setup. For example, we create a record in our network management system and reboot the computer to obtain DHCP.
+When you see the GRUB screen, you will need to supply the URL of our preseed file.
 
-## Fixing Apt
+### BIOS
 
-### Sources list
+If booting with BIOS, simply press `esc` and type `auto url=https://devcade.csh.rit.edu/preseed.txt`. 
 
-Edit `/etc/apt/source.list` and change (as needed):
+### UEFI
 
-* Remove the local cdrom:// source 
-* Uncomment the official Debian repositories
-* Add bullseye main repository
-* `apt update` 
-* `apt upgrade`
+If using UEFI, enter `Advanced Options`, select `Automated Install`, press `e`, and move down to the line that starts with `linux`, and at the end of the line, add `auto url=https://devcade.csh.rit.edu/preseed.txt`. Press `^X` to boot.
 
+## The Preseed File
 
-### Package Setup
+The preseed file is simply a list of pre-selections for the debian installer. It is used to set up networking, configure disk partitions, and set up the account. It will also handle automatically selecting yes/no on prompts, but can stop to let you control things like the password and the disk to install the OS to.
 
-Install optional but useful packages:
+## Installation Components
 
-* `apt install openssh-server`
-* `apt install neofetch`
-* `apt install vim`
-* `apt install datadog-agent`
+The preseed file installs the ssh-server, along with the following individual packages: `xinit xterm git build-essential wget openbox compton pulseaudio x11-xserver-utils`. 
 
-Install required packages:
+[devcade-onboard](https://github.com/computersciencehouse/devcade-onboard) runs as an X11 application in Openbox, and runs Compton and pulseaudio. There are also some useful build utilities.
 
-	apt install git xorg xterm compton openbox pulseaudio
+Apart from that, there are a number of auxiliary files:
 
-### Dotnet SDK
+- `bashrc-check.sh`: Used to append configuration to `.bashrc`
+- `.env`: Environment variables used for the onboard
+- `rc.xml`: Openbox configuration
+- `update.sh`: Script used to update the onboard
+- `tty1_service_override.conf`: getty systemd service
+- `.xinitrc`: Starts X11 server, loads environment vars, configures display, and launches the onboard!
+- `configure.sh`: Script that installs the Dotnet SDK and all of the above!
 
-[Add Microsoft repositories](https://learn.microsoft.com/en-us/dotnet/core/install/linux-debian#debian-11) and install the 6.0 version of the SDK. This is the version that most everything Devcade is written in and is guaranteed* to work with the source code. Future versions of the SDK might introduce breaking changes.
+## Booting the installer
 
-`apt install dotnet-sdk-6.0`
+The installer will grab the preseed file from our website, which will pre-fill many options for you, such as packages to install. You can navigate to the preseed url in your browser and read the options used.
 
+It will also set up the devcade user, and prompt you for a password. If using it, the machine will set up its hostname using DHCP.
 
-## Other Misc Setup
+The installation takes around 10 minutes. When finished, it will reboot.
 
-Add devcade to sudoers file (optional, highly recommended)
+## Configuration and setup
 
-	usermod -aG sudo devcade
-	echo "devcade ALL=(ALL) NOPASSWD:ALL" | sudo tee /etc/sudoers
-
-
-## Installing onboard
-
-
-### Clone the repo
-
-Find a nice home for the onboard somewhere in your filesystem (like $HOME/git)
-
-	cd ~
-	mkdir git
-	cd git
-	git clone https://Github.com/ComputerScienceHouse/devcade-onboard
-	cd devcade-onboard
-
-### Environment vars
-<!-- TODO -->
-Setup a .env file according to the .env template in the repo (coming soon). Then run the following:
-
-	cp .env ~/.env
-	echo "source /home/devcade/.env" >> ~/.bashrc
-
-This will source the environment variables used by Devcade every time you login.
-
-### Summoning Daemons
-
-From the onboard directory, initialize the xlogin submodule by running:
-
-    git submodule update --init --recursive
-
-To build the onboard program and put it in the correct place, run
-<!-- TODO Update idiot naming -->
-./idiot/update_onboard.sh
-cp idiot/.xinitrc /home/devcade
-mkdir -p /home/devcade/.config/openbox && cp idiot/rc.xml /home/devcade/.config/openbox
-
-To install xlogin do the following:
- 
-    cd idiot/xlogin
-    sudo make install
-    sudo systemctl enable --now xlogin@devcade
-
-You may also need to do:
-
-    cd /home/devcade/publish
-    chmod +x onboard
-
-## X Setup
-
-### .xinitrc
-
-The .xinitrc file is by default setup to use HDMI-2. If your monitor is not plugged into the second HDMI port (HINT: it probably won't be) you’ll encounter errors and need to edit the .xinitrc file with the correct output type. The file onboard.log should have the output of xrandr, which will include the correct display adapter (HINT: it’s the only one that has resolutions listed)
-
-With a correctly configured display adapter in the .xinitrc it should _Just Work™_
-
-### Xinput
-
-// TODO
-
-
-## PulseAudio Setup
-
-PulseAudio is another thing that should Just Work™.
-
-If it doesn’t, use the following commands to fix which audio sink is selected.
-
-* `pacmd list-cards` or `pactl list cards`
-* `pacmd list-sinks` or `pactl list sinks`
-* `pactl set-default-sink [NAME]`
-
-The `[NAME]` option will be the name of the audio source, which is the ENTIRE string after the ‘Monitor Source’ line in the sink information. For example the soundbar currently used in the first cabinet is:
-
-	alsa_output.usb-Lenovo_Lenovo_USB_Soundbar-00.analog-stereo
-
-If you have driver issues or encounter issues other than the sink not being set correctly: cry, pray, and despair, in that order.
-
-
-## Arcane Daemonology
-
-Once the computer is fully configured, the final step in the process is to set up a systemd service to automatically login and launch the onboard on boot. The only two things this requires are creating a service and editing the .bashrc
-
-Create a service file at `/etc/systemd/system/getty@tty1.service.d/override.conf`. This may require creating a directory.
-```
-[Service]
-Type=Simple
-ExecStart=
-ExecStart=-/sbin/agetty --autologin devcade --noclear %I 38400 linux
-```
-
-Then, add the following to the .bashrc of the devcade user:
-
-```sh
-if [[-z “$DISPLAY” ]] && [[ $(tty) = /dev/tty1 ]]; then
-    . startx
-    logout 
-fi 
-```
-
-The machine will now login to the devcade user on boot and launch the onboard program. The onboard program will also relaunch every time it closes. To use a shell again, switch to a different tty or ssh into the machine.
+When the machine comes back up, you will be presented with a login prompt. Log in with username `devcade` and the provided password, and then run the `configure.sh` script in the home directory. Reboot again, and you should have a shiny new Devcade!
