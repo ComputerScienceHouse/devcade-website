@@ -22,9 +22,13 @@ If booting with BIOS, simply press `esc` and type `auto url=https://devcade.csh.
 
 If using UEFI, enter `Advanced Options`, select `Automated Install`, press `e`, and move down to the line that starts with `linux`, and at the end of the line, add `auto url=https://devcade.csh.rit.edu/preseed.txt`. Press `^X` to boot.
 
+## The Preseed File
+
+The preseed file is simply a list of pre-selections for the debian installer. It is used to set up networking, configure disk partitions, and set up the account. It will also handle automatically selecting yes/no on prompts, but can stop to let you control things like the password and the disk to install the OS to.
+
 ## Installation Components
 
-The preseed file installs the ssh-server, along with the following individual packages: `xinit xterm git build-essential wget openbox compton pulseaudio x11-xserver-utils`
+The preseed file installs the ssh-server, along with the following individual packages: `xinit xterm git build-essential wget openbox compton pulseaudio x11-xserver-utils`. 
 
 The devcade launcher runs as an X11 application in Openbox, and runs Compton and pulseaudio. There are also some useful build utilities.
 
