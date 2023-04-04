@@ -22,6 +22,22 @@ If booting with BIOS, simply press `esc` and type `auto url=https://devcade.csh.
 
 If using UEFI, enter `Advanced Options`, select `Automated Install`, press `e`, and move down to the line that starts with `linux`, and at the end of the line, add `auto url=https://devcade.csh.rit.edu/preseed.txt`. Press `^X` to boot.
 
+## Installation Components
+
+The preseed file installs the ssh-server, along with the following individual packages: `xinit xterm git build-essential wget openbox compton pulseaudio x11-xserver-utils`
+
+The devcade launcher runs as an X11 application in Openbox, and runs Compton and pulseaudio. There are also some useful build utilities.
+
+Apart from that, there are a number of auxiliary files:
+
+- `bashrc-check.sh`: Used to append configuration to `.bashrc`
+- `.env`: Environment variables used for the onboard
+- `rc.xml`: Openbox configuration
+- `update.sh`: Script used to update the onboard
+- `tty1_service_override.conf`: getty systemd service
+- `.xinitrc`: Starts X11 server, loads environment vars, configures display, and launches the onboard!
+- `configure.sh`: Script that installs the Dotnet SDK and all of the above!
+
 ## Booting the installer
 
 The installer will grab the preseed file from our website, which will pre-fill many options for you, such as packages to install. You can navigate to the preseed url in your browser and read the options used.
