@@ -5,9 +5,11 @@ from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 from flask_pyoidc.flask_pyoidc import OIDCAuthentication
 from flask_pyoidc.provider_configuration import ProviderConfiguration, ClientMetadata
+from urllib.parse import quote_plus
 
 
 app = flask.Flask(__name__)
+app.jinja_env.filters['quote_plus'] = lambda u: quote_plus(u)
 try:
     app.config.from_pyfile(os.path.join(os.getcwd(), "config.py"))
 except:

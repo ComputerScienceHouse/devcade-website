@@ -1,6 +1,11 @@
 {% extends "header.html" %} {% block headertext %} Game Catalog {%endblock%} {%
 block content %}
 <div class="card-wrapper">
+  {% for tag in tags %}
+  <a class="btn btn-red" href="/catalog?tag={{tag.name|quote_plus}}">{{tag.name}}</a>
+  {% endfor %}
+</div>
+<div class="card-wrapper">
   {% for i in range(0,gamelist|length) %}
   {% if "CSH Only" not in gamelist[i].tags|map(attribute="name") or current_user.user_type == "CSH" %}
   {{ gamecard(gamelist[i]) }}

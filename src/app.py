@@ -14,7 +14,10 @@ def homepage():
 
 @app.route('/catalog')
 def catalogpage():
+    tag = flask.request.args.get("tag")
     games = requests.get(app.config["DEVCADE_API_URI"] + "games/").json()
+    if tag:
+        games = list(filter(lambda g: tag in map(lambda t: t['name'], g['tags']), games))
     return flask.render_template('catalog.html', gamelist=games)
 
 @app.route('/user')
