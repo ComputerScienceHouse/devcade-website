@@ -40,13 +40,14 @@ def uploadgame():
         icon = flask.request.files['icon']
         title = flask.request.form['title']
         description = flask.request.form['description']
+        tags = flask.request.form['tags']
         author = current_user.id
         file = {
             'game': ("game.zip", game.stream, "application/zip"),
             'banner': ("banner", banner.stream, banner.mimetype),
             'icon': ("icon", icon.stream, icon.mimetype)
         }
-        fields = {'title': title, 'description': description, 'author':author}
+        fields = {'title': title, 'description': description, 'author': author, 'tags': tags}
         r = requests.post(app.config["DEVCADE_API_URI"] + "games/", files=file, data=fields, headers={"frontend_api_key":app.config["FRONTEND_API_KEY"]})
         if r.status_code == 201:
             return flask.redirect('/catalog')
@@ -58,12 +59,13 @@ def uploadpage():
     usergames = []
     try:
         games = requests.get(app.config["DEVCADE_API_URI"] + "games/").json()
+        tags = requests.get(app.config["DEVCADE_API_URI"] + "tags/").json()
         for i in games:
             if i['author'] == current_user.id:
                 usergames.append(i)
     except(Exception):
         print("api offline")
-    return flask.render_template('upload.html', title='Devcade - Upload', gamelist=usergames)
+    return flask.render_template('upload.html', title='Devcade - Upload', gamelist=usergames, tags=tags)
 
 @app.route('/download/<id>')
 def download(id):
