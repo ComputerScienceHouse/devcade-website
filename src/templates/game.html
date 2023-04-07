@@ -2,6 +2,11 @@
 {%endblock %} {% block content %}
 <div class="card-wrapper">{{ gamecard(game) }}</div>
 <div class="card-wrapper">
+  {% for tag in game.tags %}
+  <a class="btn btn-red" href="/catalog?tag={{tag.name|quote_plus}}">{{tag.name}}</a>
+  {% endfor %}
+</div>
+<div class="card-wrapper">
   <a class="btn btn-red" href="/download/{{ game.id }}">Download Game</a>
 </div>
 {% if current_user.admin or current_user.id == game.author %}
