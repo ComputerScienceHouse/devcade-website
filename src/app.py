@@ -101,7 +101,7 @@ def gamejam():
 
 @app.route('/preseed')
 def preseed():
-    return flask.send_file("static/files/preseed.txt")
+    return flask.redirect('https://raw.githubusercontent.com/ComputerScienceHouse/Devcade-onboard/main/idiot/preseed.txt')
 
 @app.errorhandler(Exception)
 def page404(e):
