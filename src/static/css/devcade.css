@@ -93,10 +93,26 @@ u {
   background-color: var(--bg);
 }
 
+#alertBar {
+  position: absolute;
+  top: 3em;
+  left: 0;
+  height: 3em;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  background-color: var(--csh-secondary);
+}
+
+#alertBar > h1 {
+  margin-top: 0px;
+}
+
 #nav {
   align-items: center;
   color: white;
   width: 100%;
+  margin-top: 3em;
 }
 
 #nav .show {
@@ -159,6 +175,7 @@ img.header {
 
 #bg {
   height: min(100vh, 400px);
+  margin-top: 3em;
 }
 
 .dropdown-toggle {
@@ -198,6 +215,33 @@ img.header {
     "c"
     "b"
     "e";
+}
+
+#gamejamGrid {
+  display: grid;
+  grid-gap: 1em 1em;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto;
+  grid-template-areas:
+    "a"
+    "d"
+    "c"
+    "b"
+    "e";
+}
+
+#gamejam-flyer-wrapper {
+  grid-area: a;
+  display: flex;
+  align-items: center;
+}
+
+#gamejam-details-wrapper {
+  grid-area: c;
+}
+
+#about-gamejam-wrapper {
+  grid-area: b;
 }
 
 #about-devcade-wrapper {
@@ -403,6 +447,23 @@ a:hover {
       "a b"
       "a d"
       "c e";
+  }
+
+  #gamejamGrid {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto auto auto;
+    grid-template-areas:
+      "b a"
+      "c a"
+      "e e";
+  }
+  
+  #alertBar > h1 {
+    margin-top: 20px;
+  }
+
+  #nav {
+    margin-top: 0px;
   }
 
   .navbar-toggler-icon {

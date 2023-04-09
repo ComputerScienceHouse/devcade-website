@@ -100,6 +100,14 @@ def static_from_root():
 def credits():
     return flask.render_template('credits.html', contributors = contributors.contributors)
 
+@app.route('/gamejam')
+def gamejam():
+    return flask.render_template('gamejam.html')
+
+@app.route('/preseed')
+def preseed():
+    return flask.redirect('https://raw.githubusercontent.com/ComputerScienceHouse/Devcade-onboard/main/idiot/preseed.txt')
+
 @app.errorhandler(Exception)
 def page404(e):
     eCode = 500
