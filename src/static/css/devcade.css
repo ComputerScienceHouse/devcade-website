@@ -232,7 +232,6 @@ img.header {
 
 #gamejam-flyer-wrapper {
   grid-area: a;
-  display: flex;
   align-items: center;
 }
 

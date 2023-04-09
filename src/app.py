@@ -104,9 +104,14 @@ def credits():
 def gamejam():
     return flask.render_template('gamejam.html')
 
+@app.route('/preseed')
+def preseed():
+    return flask.redirect('https://raw.githubusercontent.com/ComputerScienceHouse/Devcade-onboard/main/idiot/preseed.txt')
+
 @app.route('/docs')
 def docs():
     return flask.redirect('https://devcade-docs.csh.rit.edu')
+
 
 @app.errorhandler(Exception)
 def page404(e):
