@@ -1,8 +1,14 @@
 {% extends "header.html" %} {% block headertext %}{%endblock%}
 {% block content %}
 
+<h1 id="countdown" style="text-align:center; font-size:1.5em;">Time Left to Submit: </h1>
+
 <div id="gamejamGrid">
     <div id="gamejam-flyer-wrapper" class="subcontent">
+        <h2>Important Dates</h2>
+        <p>Submission Deadline: April 14th 5pm</p>
+        <p>Closing Ceremony: April 16th 4pm</p>
+        <p></p>
         <a href="{{ url_for('static', filename='files/GamejamFlyer.pdf') }}">
             <img style="width: 100%" src="{{ url_for('static', filename='images/GamejamFlyer.png') }}">
         </a>
@@ -20,30 +26,53 @@
             be submitted for the gamejam.
         </p>
         <p>
-            Food will be provided for all in-person work sessions. Please fill out the below interst form if you 
-            plan on attending to let us know of any dietary restrictions you may have.
+            All participants are encouraged to build their games using either the 
+            <a target="_blank" href="https://www.monogame.net/">Monogame</a> framework (C#) or the
+            <a target="_blank" href="https://bevyengine.org/">Bevy</a> engine (Rust). To learn more about using
+            Devcade with Monogame or Bevy, check out the 
+            <a href="https://devcade-docs.csh.rit.edu/#/Getting-started/">Getting Started</a> page on the Devcade Docs.
         </p>
         <p>
             There are $700 of prizes available to win, including an <i>Elgato StreamDeck+, Raspberry Pi 4Bs, 
-            a Wacom Drawing Tablet, Visa Prepaid Gift Cards, and many more</i>!
+            a Wacom Drawing Tablet, and many more</i>!
         </p>
-        <p></p>
-        <a class="btn btn-red" target="_blank" href="https://forms.gle/hkzAfMA8CDTy2Cn18">Interested in participating?</a>
     </div>
     <div id="gamejam-details-wrapper" class="subcontent">
-        <h2>What do I need to know before attending?</h2>
+        <h2>How can I participate?</h2>
         <p>
-            If you plan on attending, please fill out the above interest form and we will reach out to you 
-            with further information! If you feel you need to reach out to us, send us an email at 
-            <a href="mailto:devcade@csh.rit.edu">devcade@csh.rit.edu</a>.
+            The gamejam has already started but it's not too late to start participating! Anyone can 
+            join the gamejam Discord server to ask questions and stay updated. 
         </p>
         <p>
-            All participants are required to build their games using either the 
-            <a target="_blank" href="https://www.monogame.net/">Monogame</a> framework (C#) or the
-            <a target="_blank" href="https://bevyengine.org/">Bevy</a> engine (Rust). We will be presenting (and recording)
-            seminars on the fundamentals and build processes of both.
+            <a href="https://discord.gg/mxg7uY2e">Join the Discord!</a>
+        </p>
+        <p>
+            Please reach out to us via the Discord or by email at 
+            <a href="mailto:devcade@csh.rit.edu">devcade@csh.rit.edu</a> if you have any questions!
         </p>
     </div>
 </div>
+
+<script>
+    var cdDate = new Date("Apr 14, 2023 21:00:00").getTime(); // 9pm UTC == 5pm EST
+
+    var count = setInterval(function() {
+        var now = new Date().getTime();
+
+        var timeleft = cdDate - now;
+
+        var days = Math.floor(timeleft / (1000 * 60 * 60 * 24));
+        var hours = Math.floor((timeleft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = Math.floor((timeleft % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((timeleft % (1000 * 60)) / 1000);
+        
+        document.getElementById("countdown").innerHTML = "Time Left to Submit: " + days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+
+        if (timeleft < 0) {
+            clearInterval(count);
+            document.getElementById("countdown").innerHTML = "Gamejam Ended! Thank you to all who participated!";
+        }
+    }, 1000);
+</script>
 
 {% endblock %}    
