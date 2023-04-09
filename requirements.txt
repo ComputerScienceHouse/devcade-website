@@ -30,5 +30,5 @@ six==1.16.0
 SQLAlchemy==1.4.42
 typing_extensions==4.4.0
 urllib3==1.26.12
-Werkzeug==2.2.2
+Werkzeug==2.2.3
 psycopg2-binary==2.9.3
