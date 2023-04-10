@@ -38,15 +38,19 @@ If you would like to run this project using your local machine, first create a `
 ```
 import os
 
+os.environ['IP'] = ''
+os.environ['PORT'] = ''
 os.environ['SERVER_NAME'] = ''
 os.environ['PREFERRED_URL_SCHEME'] = ''
+os.environ["OIDC_ISSUER"] = ""
+os.environ["OIDC_CLIENT_ID"] = ""
 os.environ["OIDC_CLIENT_SECRET"] = ""
-os.environ["DEVCADE_DB_PORT"] = ""
-os.environ["DEVCADE_DB_NAME"] = ""
-os.environ["DEVCADE_DB_USER"] = ""
-os.environ["DEVCADE_DB_PASS"] = ""
-os.environ["DEVCADE_DB_URI"] = ""
+os.environ["GOOGLE_OIDC_ISSUER"] = ""
+os.environ["GOOGLE_OIDC_CLIENT_ID"] = ""
+os.environ["GOOGLE_OIDC_CLIENT_SECRET"] = ""
 os.environ["DEVCADE_API_URI"] = ""
+os.environ["FRONTEND_API_KEY"] = ""
+os.environ["DEVCADE_IS_DEV"] = ""
 ```
 
 Note that this is just a template for the `envs.py` file. You will need to get these secrets from an RTP or Devcade developer.
