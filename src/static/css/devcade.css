@@ -235,6 +235,11 @@ img.header {
   align-items: center;
 }
 
+#gamejam-recorded-talks {
+  grid-area: e;
+  width: 100%;
+}
+
 #gamejam-details-wrapper {
   grid-area: c;
 }
