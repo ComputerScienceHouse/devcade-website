@@ -29,7 +29,7 @@ body {
 }
 
 .hidden {
-  display: none;
+  display: none !important;
 }
 
 h1 {
@@ -264,6 +264,10 @@ img.header {
   margin-top: 1.875em;
 }
 
+#yearBox {
+  text-align: center;
+}
+
 .card-wrapper {
   display: flex;
   flex-wrap: wrap;
@@ -416,6 +420,17 @@ a:hover {
   clear: both;
   font-weight: 400;
   color: #212121;
+}
+
+.menubox {
+  display: inline-block;
+  padding: 0.5em 1em;
+  background-color: #212121;
+  color: #bbb;
+}
+
+.opaque {
+  opacity: .8;
 }
 
 #feet {
