@@ -1,19 +1,10 @@
-from init import db
-
-
-class Users(db.Model):
-    __tablename__ = 'Users'
-
-    id = db.Column(db.String, primary_key=True)
-    firstname = db.Column(db.String, nullable=False)
-    lastname = db.Column(db.String, nullable=False)
-    picture = db.Column(db.String, nullable=False)
-    admin = db.Column(db.Boolean, nullable=False)
-
-    def __init__(self, uid, firstname, lastname, picture, admin):
+class User:
+    def __init__(self, uid, user_type, firstname, lastname, email, picture, admin):
         self.id = uid
+        self.user_type = user_type
         self.firstname = firstname
         self.lastname = lastname
+        self.email = email
         self.picture = picture
         self.admin = admin
 
@@ -22,9 +13,12 @@ class Users(db.Model):
 
     def to_json(self):
         return {"uid": self.uid,
+                "user_type": self.user_type,
                 "first": self.firstname,
                 "last": self.lastname,
-                "picture": self.picture}
+                "email": self.email,
+                "picture": self.picture,
+                "admin": self.admin}
 
     def get_id(self):
         return self.id

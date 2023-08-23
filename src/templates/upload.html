@@ -1,10 +1,11 @@
 {% extends "header.html" %} {% block title %}{{title}}{% endblock %} {% block
 headertext %} Upload Files {%endblock%} {% block content %} {% if
 current_user.is_authenticated %}
+<script type="module" src="{{ url_for('static', filename='js/multi-checkbox.js') }}"></script>
 <div class="card-wrapper">
   <div class="card" id="upload-card">
     <h2>Drop your files here:</h2>
-    <form action="/upload_game" method="POST" enctype="multipart/form-data">
+    <form id="form" action="/upload_game" method="POST" enctype="multipart/form-data">
       <img
         style="border-color: gray; border-style: dashed"
         class="max"
@@ -16,7 +17,26 @@ current_user.is_authenticated %}
         placeholder="Description (max 1500 chars)"
         name="description"
       ></textarea>
-      <input type="file" name="file" accept=".zip" />
+      <br>
+      <label for="game">Game Zip</label>
+      <input type="file" name="game" accept=".zip" />
+      <br>
+      <label for="banner">Banner Image</label>
+      <input type="file" name="banner" accept="*" />
+      <br>
+      <label for="icon">Icon Image</label>
+      <input type="file" name="icon" accept="*" />
+      <br>
+      <label for="tags">Tags</label>
+      <multi-checkbox id="tag-selector" name="tags" separator="," value="">
+        <ul slot="check-values">
+        {% for tag in tags %}
+          <li>{{ tag.name }}</li>
+        {% endfor %}
+        </ul>
+      </multi-checkbox>
+      <input type="hidden" id="tags" name="tags" value="">
+      <br>
       <input class="btn btn-red" id="apply" value="Upload" type="submit" />
     </form>
   </div>
@@ -31,8 +51,7 @@ current_user.is_authenticated %}
       </li>
       <li>Navigate to the newly created publish folder.</li>
       <li>
-        Create a zip archive containing this folder, a <code>banner.png</code>,
-        and a <code>icon.png</code>
+        Create a zip archive containing this folder
       </li>
       <li>
         <strong
@@ -41,7 +60,8 @@ current_user.is_authenticated %}
         (ex. If the title is `BrickBreaker`, the executable should be
         `BrickBreaker`)
       </li>
-      <li>Upload file</li>
+      <li>Upload zip file</li>
+      <li>Upload banner and icon images</li>
     </ol>
   </div>
 </div>

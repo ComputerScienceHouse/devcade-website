@@ -1,19 +1,23 @@
 {% macro gamecard(game) %}
-{% if game.author != "mstrodl" %}
 <a href="/game/{{ game.id }}">
-  <div class="game-card" style="background-image: url({{ game.bannerLink }})">
-    <img class="game-icon" src="{{ game.iconLink }}" />
+	<div class="game-card" style="background-image: url({{ config['DEVCADE_API_URI'] }}games/{{ game.id }}/banner)">
+		<img class="game-icon" src="{{ config['DEVCADE_API_URI'] }}games/{{ game.id }}/icon" />
     <div class="game-name">
       <div>
         <h2>{{ game.name }}</h2>
+        {% if game.user.user_type == "CSH" %}
         <h3>{{ game.author }}</h3>
+        {% else %}
+        <h3>{{ game.user.email.split('@')[0] }}</h3>
+        {% endif %}
       </div>
     </div>
     <div class="game-desc"><div>{{ game.description }}</div></div>
   </div>
 </a>
-{% endif %}
-{% endmacro %} {% block header %}
+{% endmacro %}
+
+{% block header %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -37,6 +41,16 @@
   <body onload="dropdown_init()">
     <div id="navBar">
       <div class="crate">
+
+        {% if config.DEVCADE_IS_DEV %}
+        <a href="/" class="title">
+          <img
+            style="height: 3em"
+            src="{{ url_for('static', filename='images/DevcadeDevLogoNoText.png') }}"
+          />
+          <h1>Devcade</h1>
+        </a>
+        {% else %}
         <a href="/" class="title">
           <img
             style="height: 3em"
@@ -44,7 +58,7 @@
           />
           <h1>Devcade</h1>
         </a>
-
+        {% endif %}
         <div class="dropdown-toggle">
           <img
             src="{{ url_for('static', filename='icons/picklist.svg') }}"
@@ -54,8 +68,8 @@
 
         <div id="nav" class="dropped hidden">
           <div class="item"><a href="/">Home</a></div>
-          <!-- <div class="item"><a href="/about">About</a></div> -->
-          <div class="item"><a href="/catalog">Catalog</a></div>
+          <div class="item"><a href="/catalog">Games</a></div>
+          <div class="item"><a href="/docs">Docs</a></div>
           {% if current_user.is_authenticated %}
           <div class="item"><a href="/upload">Upload</a></div>
           <div class="item" id="account">
@@ -85,14 +99,20 @@
             </div>
             <div class="dropdown-menu dropped hidden">
               <!-- <div class="dropdown-divider"></div> -->
-              <a class="dropdown-item" href="/login?goto={{ request.endpoint }}"
-                >Log in</a
+              <a class="dropdown-item" href="/csh_auth?goto={{ request.endpoint }}"
+                >Log In With CSH</a
+              >
+              <a class="dropdown-item" href="/google_auth?goto={{ request.endpoint }}"
+                >Log In With RIT</a
               >
             </div>
           </div>
           {% endif %}
         </div>
       </div>
+    </div>
+    <div id="alertBar">
+      <h1>Come see us in the Golisano Atrium during ImagineRIT! <b><a href="https://www.rit.edu/imagine/exhibits/devcade">Learn more</a></b></h1>
     </div>
     <div class="header">
       <img

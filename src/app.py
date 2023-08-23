@@ -5,6 +5,7 @@ from auth import app
 import requests
 from io import BytesIO
 from werkzeug.wsgi import FileWrapper 
+import contributors
 
 @app.route('/')
 # @login_required
@@ -13,7 +14,10 @@ def homepage():
 
 @app.route('/catalog')
 def catalogpage():
-    games = requests.get(app.config["DEVCADE_API_URI"] + "games/gamelist").json()
+    tag = flask.request.args.get("tag")
+    games = requests.get(app.config["DEVCADE_API_URI"] + "games/").json()
+    if tag:
+        games = list(filter(lambda g: tag in map(lambda t: t['name'], g['tags']), games))
     return flask.render_template('catalog.html', gamelist=games)
 
 @app.route('/user')
@@ -25,26 +29,30 @@ def user():
 
 @app.route('/game/<id>')
 def getgame(id):
-    games = requests.get(app.config["DEVCADE_API_URI"] + "games/gamelist").json()
-    for i in range(len(games)):
-        if games[i]['id'] == id:
-            break
-    else:
+    game_req = requests.get(app.config["DEVCADE_API_URI"] + f"games/{id}")
+    if game_req.status_code == 404:
         flask.render_template('404.html')
-    return flask.render_template('game.html', game=games[i])
+    return flask.render_template('game.html', game=game_req.json())
 
 @app.route('/upload_game', methods = ['POST'])
 @login_required
 def uploadgame():
     if flask.request.method == 'POST':
-        f = flask.request.files['file']
+        game = flask.request.files['game']
+        banner = flask.request.files['banner']
+        icon = flask.request.files['icon']
         title = flask.request.form['title']
         description = flask.request.form['description']
+        tags = flask.request.form['tags']
         author = current_user.id
-        file = {'file': ("game.zip", f.stream, "application/zip")}
-        fields = {'title': title, 'description': description, 'author':author}
-        r = requests.post(app.config["DEVCADE_API_URI"] + "games/upload", files=file, data=fields)
-        if r.status_code == 200:
+        file = {
+            'game': ("game.zip", game.stream, "application/zip"),
+            'banner': ("banner", banner.stream, banner.mimetype),
+            'icon': ("icon", icon.stream, icon.mimetype)
+        }
+        fields = {'title': title, 'description': description, 'author': author, 'tags': tags}
+        r = requests.post(app.config["DEVCADE_API_URI"] + "games/", files=file, data=fields, headers={"frontend_api_key":app.config["FRONTEND_API_KEY"]})
+        if r.status_code == 201:
             return flask.redirect('/catalog')
         return "<p>" + r.text + "</p>"
 
@@ -53,17 +61,18 @@ def uploadgame():
 def uploadpage():
     usergames = []
     try:
-        games = requests.get(app.config["DEVCADE_API_URI"] + "games/gamelist").json()
+        games = requests.get(app.config["DEVCADE_API_URI"] + "games/").json()
+        tags = requests.get(app.config["DEVCADE_API_URI"] + "tags/").json()
         for i in games:
             if i['author'] == current_user.id:
                 usergames.append(i)
     except(Exception):
         print("api offline")
-    return flask.render_template('upload.html', title='Devcade - Upload', gamelist=usergames)
+    return flask.render_template('upload.html', title='Devcade - Upload', gamelist=usergames, tags=tags)
 
 @app.route('/download/<id>')
 def download(id):
-    r = requests.get(app.config["DEVCADE_API_URI"] + "games/download/" + id, stream=True)
+    r = requests.get(app.config["DEVCADE_API_URI"] + f"games/{id}/game", stream=True)
     b = BytesIO(r.content)
     game = FileWrapper(b)
     return flask.Response(game, mimetype="application/zip", direct_passthrough=True)
@@ -71,13 +80,10 @@ def download(id):
 @app.route('/admin/delete/<id>')
 @login_required
 def deleteGame(id):
-    games = requests.get(app.config['DEVCADE_API_URI'] + "games/gamelist").json()
-    author = ""
-    for i in games:
-        if i['id'] == id:
-            author = i['author']
+    game = requests.get(app.config['DEVCADE_API_URI'] + "games/" + id).json()
+    author = game['author']
     if(current_user.admin or current_user.id == author):
-        r = requests.post(app.config["DEVCADE_API_URI"] + "games/delete/" + id)
+        r = requests.delete(app.config["DEVCADE_API_URI"] + "games/" + id, headers={"frontend_api_key":app.config["FRONTEND_API_KEY"]})
         if r.status_code != 200:
             return r.text
     else:
@@ -89,6 +95,23 @@ def deleteGame(id):
 @app.route("/favicon.ico")
 def static_from_root():
     return flask.send_from_directory(app.static_folder, flask.request.path[1:])
+
+@app.route('/credits')
+def credits():
+    return flask.render_template('credits.html', contributors = contributors.contributors)
+
+@app.route('/gamejam')
+def gamejam():
+    return flask.render_template('gamejam.html')
+
+@app.route('/preseed')
+def preseed():
+    return flask.redirect('https://raw.githubusercontent.com/ComputerScienceHouse/Devcade-onboard/main/idiot/preseed.txt')
+
+@app.route('/docs')
+def docs():
+    return flask.redirect('https://devcade-docs.csh.rit.edu')
+
 
 @app.errorhandler(Exception)
 def page404(e):
