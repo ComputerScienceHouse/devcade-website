@@ -11,7 +11,9 @@ current_user.is_authenticated %}
         class="max"
         src="{{ url_for('static', filename='images/csh_tilted.png') }}"
       />
-      <input type="text" name="title" placeholder="title" />
+      <div>
+      <label for="title" style="--after: ' (UseCamelCase)'">Title</label>
+      <input type="text" name="title" placeholder="Game Title" />
       <textarea
         maxlength="1500"
         placeholder="Description (max 1500 chars)"
@@ -38,6 +40,7 @@ current_user.is_authenticated %}
       <input type="hidden" id="tags" name="tags" value="">
       <br>
       <input class="btn btn-red" id="apply" value="Upload" type="submit" />
+    </div>
     </form>
   </div>
   <div class="card">
