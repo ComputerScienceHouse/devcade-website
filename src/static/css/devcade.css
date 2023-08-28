@@ -83,6 +83,15 @@ u {
   text-decoration-style: wavy;
 }
 
+label {
+  font-size: medium;
+}
+
+label::after {
+  font-size: x-small;
+  content: var(--after)
+}
+
 #navBar {
   position: absolute;
   top: 0;
