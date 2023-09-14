@@ -5,7 +5,13 @@ from auth import app
 import requests
 from io import BytesIO
 from werkzeug.wsgi import FileWrapper 
-import contributors
+import json
+import hashlib
+
+contributors = json.load(open("./static/json/contributors.json", "r"))
+for year in contributors:
+    for person in contributors[year]:
+        person['emailHash'] = hashlib.md5(str.encode(person['email'])).hexdigest()
 
 @app.route('/')
 # @login_required
@@ -98,7 +104,7 @@ def static_from_root():
 
 @app.route('/credits')
 def credits():
-    return flask.render_template('credits.html', contributors = contributors.contributors)
+    return flask.render_template('credits.html', contributors = contributors, last_year=list(contributors.keys())[0])
 
 @app.route('/gamejam')
 def gamejam():
@@ -106,7 +112,7 @@ def gamejam():
 
 @app.route('/preseed')
 def preseed():
-    return flask.redirect('https://raw.githubusercontent.com/ComputerScienceHouse/Devcade-onboard/main/idiot/preseed.txt')
+    return flask.redirect('https://raw.githubusercontent.com/ComputerScienceHouse/Devcade-onboard/main/dcu/preseed.txt')
 
 @app.route('/docs')
 def docs():
