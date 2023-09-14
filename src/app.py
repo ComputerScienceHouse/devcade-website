@@ -112,7 +112,7 @@ def gamejam():
 
 @app.route('/preseed')
 def preseed():
-    return flask.redirect('https://raw.githubusercontent.com/ComputerScienceHouse/Devcade-onboard/main/idiot/preseed.txt')
+    return flask.redirect('https://raw.githubusercontent.com/ComputerScienceHouse/Devcade-onboard/main/dcu/preseed.txt')
 
 @app.route('/docs')
 def docs():
