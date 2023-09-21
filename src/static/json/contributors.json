@@ -5,9 +5,21 @@
       "link": "https://asimonson.com",
       "email": "cinnamon@csh.rit.edu",
       "desc": "Public Site Developer, Fourth Year CS"
+    },
+    {
+      "name": "Ella Soccoli",
+      "link": "https://github.com/esoccoli",
+      "email": "ella@csh.rit.edu",
+      "desc": "Game Developer, 2nd Year GDD"
     }
   ],
   "2022 - 2023": [
+    {
+      "name": "Joe Abbate",
+      "link": "https://joeabbate.me",
+      "email": "skyz@csh.rit.edu",
+      "desc": "Lead Security Engineer, Third Year Cyber Security"
+    },
     {
       "name": "Andrew Ebersole",
       "link": "",
@@ -63,8 +75,14 @@
       "desc": "Public Site Developer, Third Year CS"
     },
     {
+      "name": "Jeremy Smart",
+      "link": "https://github.com/Qelxiros",
+      "email": "qel@csh.rit.edu",
+      "desc": "Game Developer, First Year CS"
+    },
+    {
       "name": "Ella Soccoli",
-      "link": "https://esoccoli.me",
+      "link": "https://https://github.com/esoccoli",
       "email": "ella@csh.rit.edu",
       "desc": "Game Developer, First Year GDD"
     },
@@ -85,12 +103,6 @@
       "link": "",
       "email": "chrisp@csh.rit.edu",
       "desc": "Hardware Team, First Year GDD"
-    },
-    {
-      "name": "Joe Abbate",
-      "link": "https://joeabbate.me",
-      "email": "skyz@csh.rit.edu",
-      "desc": "Lead Security Engineer, Third Year Cyber Security"
     }
   ]
 }
