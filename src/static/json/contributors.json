@@ -9,6 +9,12 @@
   ],
   "2022 - 2023": [
     {
+      "name": "Joe Abbate",
+      "link": "https://joeabbate.me",
+      "email": "skyz@csh.rit.edu",
+      "desc": "Lead Security Engineer, Third Year Cyber Security"
+    },
+    {
       "name": "Andrew Ebersole",
       "link": "",
       "email": "andrewe@csh.rit.edu",
@@ -63,6 +69,12 @@
       "desc": "Public Site Developer, Third Year CS"
     },
     {
+      "name": "Jeremy Smart",
+      "link": "https://github.com/Qelxiros",
+      "email": "qel@csh.rit.edu",
+      "desc": "Game Developer, First Year CS"
+    },
+    {
       "name": "Ella Soccoli",
       "link": "https://esoccoli.me",
       "email": "ella@csh.rit.edu",
@@ -85,12 +97,6 @@
       "link": "",
       "email": "chrisp@csh.rit.edu",
       "desc": "Hardware Team, First Year GDD"
-    },
-    {
-      "name": "Joe Abbate",
-      "link": "https://joeabbate.me",
-      "email": "skyz@csh.rit.edu",
-      "desc": "Lead Security Engineer, Third Year Cyber Security"
     }
   ]
 }
