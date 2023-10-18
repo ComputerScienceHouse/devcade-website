@@ -1,4 +1,0 @@
-# https://www.robotstxt.org/robotstxt.html
-User-agent: *
-Disallow: /404/
-Sitemap: https://devcade.csh.rit.edu/sitemap.xml

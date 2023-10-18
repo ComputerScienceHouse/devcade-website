@@ -1,56 +1,33 @@
-# devcade-website
-Front-end for the Devcade website that allows members to view the game catalog and upload games.
+# CSH React Boilerplate
 
-# How to Run
-`pip3 install -r requirements.txt`
+Ever wanted to create a CSH house service in React but realized that auth is hard and that react is big and scary? This boilerplate attempts to solve that issue.
 
-`cd src`
+This provides all the setup work needed to create a CSH React app quickly. This may not fit all use cases, and you may want to modify things heavily. Go ahead!
+This is simply a starting place.
 
-`flask run`
+## Local Development
+You're going to need [node](https://nodejs.org/en/).
 
-# Project Structure
-This project follows a standard template for a Flask project. Below is the basic file structure of the project, with every file described other than those in the `static/` folder (for brevity).
-
-```
-devcade-website
-| src/
-| | static/         // Static content (images, css, js)
-| | templates/      // Header and content templates
-| | | header.html   // Includes game block macro and header block macro
-| | | game.html     // Game focus page
-| | | catalog.html  // Game catalog page
-| | | credits.html  // Game credits page (using game blocks)
-| | | error.html    // Error page
-| | | home.html     // Main page, includes project details
-| | | upload.html   // Game upload page, including instructions
-| | | profile.html  // User profile -- not implemented
-| app.py            // Main file
-| auth.py           // Helper functions for handling CSH auth
-| config.py         // Environment variable getters
-| init.py           // Initialization for flask project
-| models.py         // User model
-| envs.py           // Environment variable setters (Follows template described in Local Development section)
-```
-
-# Local Development
-If you would like to run this project using your local machine, first create a `envs.py` file with the following structure:
+### Setup with npm
 
 ```
-import os
-
-os.environ['IP'] = ''
-os.environ['PORT'] = ''
-os.environ['SERVER_NAME'] = ''
-os.environ['PREFERRED_URL_SCHEME'] = ''
-os.environ["OIDC_ISSUER"] = ""
-os.environ["OIDC_CLIENT_ID"] = ""
-os.environ["OIDC_CLIENT_SECRET"] = ""
-os.environ["GOOGLE_OIDC_ISSUER"] = ""
-os.environ["GOOGLE_OIDC_CLIENT_ID"] = ""
-os.environ["GOOGLE_OIDC_CLIENT_SECRET"] = ""
-os.environ["DEVCADE_API_URI"] = ""
-os.environ["FRONTEND_API_KEY"] = ""
-os.environ["DEVCADE_IS_DEV"] = ""
+npm install
 ```
 
-Note that this is just a template for the `envs.py` file. You will need to get these secrets from an RTP or Devcade developer.
+### Run in development
+
+```
+npm start
+```
+
+In order to run locally, you're going to need an OIDC client, by default there's a `.env` file which defines all variables you don't want to commit to the repo directly. The default SSO variables will work for development purposes. It will only work on `http://localhost:3000`.
+For more information on CSH SSO, and getting an OIDC client, talk to an RTP.
+
+
+All variables need to be prepended with `REACT_APP_`
+
+___
+
+## Help! I don't have a CSH account or I dont want to secure the website in development!
+
+No problem! You can disable SSO in `configuration.ts` by changing `SSOEnabled` to `'false'`, or alternatively, you can set the `REACT_APP_SSO_ENABLED` variable to false.
