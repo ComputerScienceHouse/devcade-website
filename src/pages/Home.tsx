@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import Authenticating from '../callbacks/Authenticating'
 import AuthenticationError from '../callbacks/AuthenticationError'
 import SessionLost from '../callbacks/SessionLost'
-import UserInfo from '../UserInfo'
+import UserInfo from '../../UserInfo'
 
 const Home = () => {
     // important hooks
