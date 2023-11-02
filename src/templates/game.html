@@ -6,12 +6,14 @@
   <a class="btn btn-red" href="/catalog?tag={{tag.name|quote_plus}}">{{tag.name}}</a>
   {% endfor %}
 </div>
+{% if game.hash %}
 <div class="card-wrapper">
   <a class="btn btn-red" href="/download/{{ game.id }}">Download Game</a>
 </div>
+{% endif %}
 {% if current_user.admin or current_user.id == game.author %}
-<h2>Admin stuff:</h2>
 <div class="card-wrapper">
+  <a class="btn btn-red" href="/game/{{ game.id }}/upload">Upload</a>
   <a class="btn btn-red" href="/edit/{{ game.id }}">Edit</a>
   <a class="btn btn-red" href="/admin/delete/{{ game.id }}">Delete</a>
 </div>
