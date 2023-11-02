@@ -40,11 +40,34 @@ def getgame(id):
         flask.render_template('404.html')
     return flask.render_template('game.html', game=game_req.json())
 
+@app.route('/game/<id>/upload', methods = ['POST', 'GET'])
+@login_required
+def upload_new_game_binary(id):
+    game_req = requests.get(app.config["DEVCADE_API_URI"] + f"games/{id}")
+    if game_req.status_code == 404:
+        flask.render_template('404.html')
+    if flask.request.method == "POST":
+        game_file = flask.request.files['game']
+        file = {
+            'file': game_file,
+        }
+        r = requests.put(
+            app.config["DEVCADE_API_URI"] + f"games/{id}/game",
+            files=file,
+            data={},
+            headers={"frontend_api_key":app.config["FRONTEND_API_KEY"]}
+        )
+        if r.status_code == 200:
+            return flask.redirect(f'/game/{id}')
+        else:
+            return 500, r.text
+
+    return flask.render_template('upload_binary.html', game=game_req.json())
+
 @app.route('/upload_game', methods = ['POST'])
 @login_required
 def uploadgame():
     if flask.request.method == 'POST':
-        game = flask.request.files['game']
         banner = flask.request.files['banner']
         icon = flask.request.files['icon']
         title = flask.request.form['title']
@@ -52,7 +75,6 @@ def uploadgame():
         tags = flask.request.form['tags']
         author = current_user.id
         file = {
-            'game': ("game.zip", game.stream, "application/zip"),
             'banner': ("banner", banner.stream, banner.mimetype),
             'icon': ("icon", icon.stream, icon.mimetype)
         }

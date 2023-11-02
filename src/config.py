@@ -35,3 +35,5 @@ DEVCADE_API_URI = env.get('DEVCADE_API_URI')
 FRONTEND_API_KEY = env.get('FRONTEND_API_KEY')
 
 DEVCADE_IS_DEV = env.get('DEVCADE_IS_DEV')
+
+SECRET_KEY = env.get('SECRET_KEY') or os.urandom(16)

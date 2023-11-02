@@ -5,36 +5,15 @@ current_user.is_authenticated %}
 <div class="card-wrapper">
   <div class="card" id="upload-card">
     <h2>Drop your files here:</h2>
-    <form id="form" action="/upload_game" method="POST" enctype="multipart/form-data">
+    <form id="form" action method="POST" enctype="multipart/form-data">
       <img
         style="border-color: gray; border-style: dashed"
         class="max"
         src="{{ url_for('static', filename='images/csh_tilted.png') }}"
       />
       <div>
-      <label for="title" style="--after: ' (UseCamelCase)'">Title</label>
-      <input type="text" name="title" placeholder="Game Title" />
-      <textarea
-        maxlength="1500"
-        placeholder="Description (max 1500 chars)"
-        name="description"
-      ></textarea>
-      <br>
-      <label for="banner" style="--after: ' (800x450 res preferred)'">Banner Image</label>
-      <input type="file" name="banner" accept="*" />
-      <br>
-      <label for="icon" style="--after: ' (200x200 res preferred)'" >Icon Image</label>
-      <input type="file" name="icon" accept="*" />
-      <br>
-      <label for="tags">Tags</label>
-      <multi-checkbox id="tag-selector" name="tags" separator="," value="">
-        <ul slot="check-values">
-        {% for tag in tags %}
-          <li>{{ tag.name }}</li>
-        {% endfor %}
-        </ul>
-      </multi-checkbox>
-      <input type="hidden" id="tags" name="tags" value="">
+      <label for="game">Game Flatpak</label>
+      <input type="file" name="game" accept="*" />
       <br>
       <input class="btn btn-red" id="apply" value="Upload" type="submit" />
     </div>
@@ -60,18 +39,10 @@ current_user.is_authenticated %}
         (ex. If the title is `BrickBreaker`, the executable should be
         `BrickBreaker`)
       </li>
-      <li>Upload zip file</li>
-      <li>Upload banner and icon images</li>
+      <li>Convert your zip file to a flatpak file using the tool Mary is probably going to forget to publish</li>
+      <li>Upload flatpak file here</li>
     </ol>
   </div>
-</div>
-<h1>Your games:</h1>
-<div class="card-wrapper">
-  {% for i in gamelist %}
-  {{ gamecard(i) }}
-  {% endfor %} {% if gamelist|length == 0 %}
-  <h2>You have no uploads!</h2>
-  {% endif %}
 </div>
 {% else %}
 <p id="description">
