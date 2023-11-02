@@ -5,7 +5,7 @@ current_user.is_authenticated %}
 <div class="card-wrapper">
   <div class="card" id="upload-card">
     <h2>Drop your files here:</h2>
-    <form id="form" action="/upload_game" method="POST" enctype="multipart/form-data">
+    <form id="form" action="/create_game" method="POST" enctype="multipart/form-data">
       <img
         style="border-color: gray; border-style: dashed"
         class="max"
@@ -36,7 +36,7 @@ current_user.is_authenticated %}
       </multi-checkbox>
       <input type="hidden" id="tags" name="tags" value="">
       <br>
-      <input class="btn btn-red" id="apply" value="Upload" type="submit" />
+      <input class="btn btn-red" id="apply" value="Create" type="submit" />
     </div>
     </form>
   </div>

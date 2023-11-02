@@ -60,13 +60,13 @@ def upload_new_game_binary(id):
         if r.status_code == 200:
             return flask.redirect(f'/game/{id}')
         else:
-            return 500, r.text
+            return r.text, 500
 
     return flask.render_template('upload_binary.html', game=game_req.json())
 
-@app.route('/upload_game', methods = ['POST'])
+@app.route('/create_game', methods = ['POST', 'GET'])
 @login_required
-def uploadgame():
+def create_game():
     if flask.request.method == 'POST':
         banner = flask.request.files['banner']
         icon = flask.request.files['icon']
@@ -83,20 +83,17 @@ def uploadgame():
         if r.status_code == 201:
             return flask.redirect('/catalog')
         return "<p>" + r.text + "</p>"
-
-@app.route('/upload')
-@login_required
-def uploadpage():
-    usergames = []
-    try:
-        games = requests.get(app.config["DEVCADE_API_URI"] + "games/").json()
-        tags = requests.get(app.config["DEVCADE_API_URI"] + "tags/").json()
-        for i in games:
-            if i['author'] == current_user.id:
-                usergames.append(i)
-    except(Exception):
-        print("api offline")
-    return flask.render_template('upload.html', title='Devcade - Upload', gamelist=usergames, tags=tags)
+    else:
+        usergames = []
+        try:
+            games = requests.get(app.config["DEVCADE_API_URI"] + "games/").json()
+            tags = requests.get(app.config["DEVCADE_API_URI"] + "tags/").json()
+            for i in games:
+                if i['author'] == current_user.id:
+                    usergames.append(i)
+        except(Exception):
+            print("api offline")
+        return flask.render_template('create_game.html', title='Devcade - Create Game', gamelist=usergames, tags=tags)
 
 @app.route('/download/<id>')
 def download(id):

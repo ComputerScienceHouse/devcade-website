@@ -30,17 +30,11 @@ current_user.is_authenticated %}
       </li>
       <li>Navigate to the newly created publish folder.</li>
       <li>
-        Create a zip archive containing this folder
-      </li>
-      <li>
-        <strong
-          >The name of the game binary must match the name you enter!</strong
-        >
-        (ex. If the title is `BrickBreaker`, the executable should be
-        `BrickBreaker`)
-      </li>
-      <li>Convert your zip file to a flatpak file using the tool Mary is probably going to forget to publish</li>
-      <li>Upload flatpak file here</li>
+        In the folder <em>containing</em> your publish folder, run <br /><code
+          ><a href="https://github.com/ComputerScienceHouse/devcade-flatpakify"
+            >devcade-flatpakify</a
+            > {{ game.id }}</code></li>
+      <li>Upload the generated flatpak file here!</li>
     </ol>
   </div>
 </div>
