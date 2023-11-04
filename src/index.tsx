@@ -5,13 +5,13 @@ import App from './App'
 import { OidcProvider, OidcSecure } from '@axa-fr/react-oidc'
 import configuration from './configuration'
 import { SSOEnabled } from './configuration'
-import Authenticating from './src/callbacks/Authenticating'
-import AuthenticationError from './src/callbacks/AuthenticationError'
-import Loading from './src/callbacks/Loading'
-import SessionLost from './src/callbacks/SessionLost'
+import Authenticating from './callbacks/Authenticating'
+import AuthenticationError from './callbacks/AuthenticationError'
+import Loading from './callbacks/Loading'
+import SessionLost from './callbacks/SessionLost'
 
 const root = ReactDOM.createRoot(
-    document.getElementById('root') as HTMLElement
+  document.getElementById('root') as HTMLElement
 )
 // handle security in here, and routing in app
 

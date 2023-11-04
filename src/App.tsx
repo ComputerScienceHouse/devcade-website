@@ -1,9 +1,9 @@
 import React from 'react'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
-import Home from './src/pages/Home'
-import PageContainer from './src/containers/PageContainer'
+import Home from './pages/Home'
+import { PageContainer } from './containers/PageContainer'
 import 'csh-material-bootstrap/dist/csh-material-bootstrap.css'
-import NotFound from './src/pages/NotFound'
+import NotFound from './pages/NotFound'
 
 type Props = {
   rerouteHomeOn404?: boolean
