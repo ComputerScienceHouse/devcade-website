@@ -12,23 +12,7 @@
     left: 0;
     display: flex;
     justify-content: space-between;
-    width: 100%;
     background-color: var(--bg);
-}
-
-.crate {
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-wrap: wrap;
-    flex-wrap: wrap;
-    -ms-flex-align: center;
-    align-items: center;
-    -ms-flex-pack: justify;
-    justify-content: space-between;
-    width: 100%;
-    max-width: 1140px;
-    margin-right: auto;
-    margin-left: auto;
 }
 
 .navbar-devcade {
@@ -42,10 +26,16 @@
     line-height: inherit;
     white-space: nowrap;
     color: #fff;
+    text-align: center;
 }
 
 #navbar .nav-link {
     margin: 0px 1em;
     font-size: 18px;
     text-align: end;
+}
+
+.container {
+    margin: 0px;
+    padding: 0px;
 }

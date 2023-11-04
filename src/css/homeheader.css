@@ -1,0 +1,14 @@
+#headerbg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--bg);
+    background-image: url('../../public/img/csh_tilted.png');
+    background-repeat: repeat;
+    background-size: 10em;
+}
+
+#bg {
+    height: min(100vh, 400px);
+    margin-top: 3em;
+}
