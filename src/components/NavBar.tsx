@@ -9,6 +9,7 @@ import {
 } from 'reactstrap'
 import { NavLink } from 'react-router-dom'
 import Profile from './Profile'
+import '../css/navbar.css'
 
 const NavBar: React.FunctionComponent = () => {
     const [isOpen, setIsOpen] = React.useState<boolean>(false)
@@ -19,22 +20,38 @@ const NavBar: React.FunctionComponent = () => {
 
     return (
         <div>
-            <Navbar color='primary' dark expand='lg' fixed='top'>
+            <Navbar id='navbar' dark expand='lg' fixed='top'>
                 <Container>
-                    <NavLink to='/' className={'navbar-brand'}>
-                        CSH React Boilerplate
+                    <NavLink to='/' className={'navbar-devcade'}>
+                        Devcade
                     </NavLink>
                     <NavbarToggler onClick={toggle} />
                     <Collapse isOpen={isOpen} navbar>
                         <Nav navbar>
+
                             <NavItem>
                                 <NavLink to='/' className='nav-link'>
                                     Home
                                 </NavLink>
                             </NavItem>
-                            {
-                                // to add stuff to the navbar, add a NavItem tag with a NavLink to the route
-                            }
+
+                            <NavItem>
+                                <NavLink to='/catalog' className='nav-link'>
+                                    Games
+                                </NavLink>
+                            </NavItem>
+
+                            <NavItem>
+                                <NavLink to='/docs#/' className='nav-link'>
+                                    Docs
+                                </NavLink>
+                            </NavItem>
+
+                            <NavItem>
+                                <NavLink to='/create_game' className='nav-link'>
+                                    Create Game
+                                </NavLink>
+                            </NavItem>
                         </Nav>
                         <Nav navbar className='ml-auto'>
                             <Profile />

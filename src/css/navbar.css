@@ -1,0 +1,51 @@
+:root {
+    --csh-primary: #B0197E;
+    --csh-secondary: #E11C52;
+    --csh-tertiary: #340526;
+    --bg: #25021A;
+    --fg: #FFFFFF;
+}
+
+#navbar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    background-color: var(--bg);
+}
+
+.crate {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1140px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.navbar-devcade {
+    font-size: 24px;
+    padding-left: 3.2rem;
+    background: url("../../public/img/DevcadeLogoNoText.png") 0/2.2rem no-repeat;
+    display: inline-block;
+    padding-top: 0.34766rem;
+    padding-bottom: 0.34766rem;
+    margin-right: 1rem;
+    line-height: inherit;
+    white-space: nowrap;
+    color: #fff;
+}
+
+#navbar .nav-link {
+    margin: 0px 1em;
+    font-size: 18px;
+    text-align: end;
+}
