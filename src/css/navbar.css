@@ -29,6 +29,10 @@
     text-align: center;
 }
 
+.navbar-devcade:hover {
+    color: white;
+}
+
 #navbar .nav-link {
     margin: 0px 1em;
     font-size: 18px;
