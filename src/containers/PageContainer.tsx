@@ -1,5 +1,4 @@
 import React from "react"
-import { Container } from "reactstrap"
 import NavBar from "../components/NavBar"
 import Header from "../components/Header"
 import Footer from "../components/home/Footer"

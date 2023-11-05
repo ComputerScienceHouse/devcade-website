@@ -6,7 +6,6 @@ import {
 } from 'reactstrap'
 
 import React from 'react'
-import { useOidc, useOidcAccessToken, useOidcIdToken } from '@axa-fr/react-oidc'
 import UserInfo from '../UserInfo'
 import { SSOEnabled } from '../configuration'
 import { getUseOidcAccessToken, getUseOidcHook, NoSSOProfilePicture, NoSSOUserInfo, useOidcAccessTokenNoSSO, useOidcNoSSO } from '../SSODisabledDefaults'

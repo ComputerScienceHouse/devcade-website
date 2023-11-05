@@ -1,14 +1,6 @@
 import { useOidcAccessToken, useOidc, useOidcIdToken } from '@axa-fr/react-oidc'
-import React from 'react'
-import { Link } from 'react-router-dom'
-import Authenticating from '../callbacks/Authenticating'
-import AuthenticationError from '../callbacks/AuthenticationError'
-import SessionLost from '../callbacks/SessionLost'
 import UserInfo from '../UserInfo'
-import Header from '../components/Header'
-import { Container } from 'reactstrap'
 import HomeGrid from '../components/home/HomeGrid'
-import Footer from '../components/home/Footer'
 
 const Home = () => {
     // important hooks
