@@ -7,6 +7,7 @@ import SessionLost from '../callbacks/SessionLost'
 import UserInfo from '../UserInfo'
 import Header from '../components/Header'
 import { Container } from 'reactstrap'
+import HomeGrid from '../components/home/HomeGrid'
 
 const Home = () => {
     // important hooks
@@ -16,7 +17,7 @@ const Home = () => {
     const { login, logout, isAuthenticated } = useOidc()  // this gets the functions to login and logout and the logout state
 
     return (
-        <div></div>
+        <HomeGrid />
     )
 }
 
