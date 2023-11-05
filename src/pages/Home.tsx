@@ -5,7 +5,7 @@ import Authenticating from '../callbacks/Authenticating'
 import AuthenticationError from '../callbacks/AuthenticationError'
 import SessionLost from '../callbacks/SessionLost'
 import UserInfo from '../UserInfo'
-import HomeHeader from '../components/HomeHeader'
+import Header from '../components/Header'
 import { Container } from 'reactstrap'
 
 const Home = () => {
@@ -16,7 +16,7 @@ const Home = () => {
     const { login, logout, isAuthenticated } = useOidc()  // this gets the functions to login and logout and the logout state
 
     return (
-        <HomeHeader />
+        <div></div>
     )
 }
 

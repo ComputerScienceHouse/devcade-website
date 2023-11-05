@@ -1,5 +1,5 @@
 import React from "react";
-import '../css/homeheader.css';
+import '../css/header.css';
 import '../index.tsx.css';
 
 const HomeHeader: React.FunctionComponent = () => {
