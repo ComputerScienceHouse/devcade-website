@@ -52,6 +52,12 @@ const NavBar: React.FunctionComponent = () => {
                                     Create Game
                                 </NavLink>
                             </NavItem>
+
+                            <NavItem>
+                                <NavLink to='/credits' className='nav-link'>
+                                    Credits
+                                </NavLink>
+                            </NavItem>
                         </Nav>
                         <Nav navbar className='ml-auto'>
                             <Profile />
