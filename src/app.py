@@ -40,11 +40,34 @@ def getgame(id):
         flask.render_template('404.html')
     return flask.render_template('game.html', game=game_req.json())
 
-@app.route('/upload_game', methods = ['POST'])
+@app.route('/game/<id>/upload', methods = ['POST', 'GET'])
 @login_required
-def uploadgame():
+def upload_new_game_binary(id):
+    game_req = requests.get(app.config["DEVCADE_API_URI"] + f"games/{id}")
+    if game_req.status_code == 404:
+        flask.render_template('404.html')
+    if flask.request.method == "POST":
+        game_file = flask.request.files['game']
+        file = {
+            'file': game_file,
+        }
+        r = requests.put(
+            app.config["DEVCADE_API_URI"] + f"games/{id}/game",
+            files=file,
+            data={},
+            headers={"frontend_api_key":app.config["FRONTEND_API_KEY"]}
+        )
+        if r.status_code == 200:
+            return flask.redirect(f'/game/{id}')
+        else:
+            return r.text, 500
+
+    return flask.render_template('upload_binary.html', game=game_req.json())
+
+@app.route('/create_game', methods = ['POST', 'GET'])
+@login_required
+def create_game():
     if flask.request.method == 'POST':
-        game = flask.request.files['game']
         banner = flask.request.files['banner']
         icon = flask.request.files['icon']
         title = flask.request.form['title']
@@ -52,7 +75,6 @@ def uploadgame():
         tags = flask.request.form['tags']
         author = current_user.id
         file = {
-            'game': ("game.zip", game.stream, "application/zip"),
             'banner': ("banner", banner.stream, banner.mimetype),
             'icon': ("icon", icon.stream, icon.mimetype)
         }
@@ -61,20 +83,17 @@ def uploadgame():
         if r.status_code == 201:
             return flask.redirect('/catalog')
         return "<p>" + r.text + "</p>"
-
-@app.route('/upload')
-@login_required
-def uploadpage():
-    usergames = []
-    try:
-        games = requests.get(app.config["DEVCADE_API_URI"] + "games/").json()
-        tags = requests.get(app.config["DEVCADE_API_URI"] + "tags/").json()
-        for i in games:
-            if i['author'] == current_user.id:
-                usergames.append(i)
-    except(Exception):
-        print("api offline")
-    return flask.render_template('upload.html', title='Devcade - Upload', gamelist=usergames, tags=tags)
+    else:
+        usergames = []
+        try:
+            games = requests.get(app.config["DEVCADE_API_URI"] + "games/").json()
+            tags = requests.get(app.config["DEVCADE_API_URI"] + "tags/").json()
+            for i in games:
+                if i['author'] == current_user.id:
+                    usergames.append(i)
+        except(Exception):
+            print("api offline")
+        return flask.render_template('create_game.html', title='Devcade - Create Game', gamelist=usergames, tags=tags)
 
 @app.route('/download/<id>')
 def download(id):

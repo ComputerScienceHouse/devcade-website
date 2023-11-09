@@ -37,4 +37,4 @@ auth = OIDCAuthentication(
 )
 
 auth.init_app(app)
-app.secret_key = os.urandom(16)
+app.secret_key = app.config["SECRET_KEY"] # os.urandom(16)

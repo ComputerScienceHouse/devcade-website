@@ -377,6 +377,15 @@ img.header {
   }
 }
 
+code a:not(.btn) {
+  font-family: unset;
+  color: var(--csh-secondary);
+}
+
+code {
+  background: var(--bg);
+}
+
 a:not(.btn) {
   font-family: "Rubik Medium", Rubik, Roboto, sans-serif;
   text-decoration: none;

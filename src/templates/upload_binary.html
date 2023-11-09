@@ -1,0 +1,46 @@
+{% extends "header.html" %} {% block title %}{{title}}{% endblock %} {% block
+headertext %} Upload Files {%endblock%} {% block content %} {% if
+current_user.is_authenticated %}
+<script type="module" src="{{ url_for('static', filename='js/multi-checkbox.js') }}"></script>
+<div class="card-wrapper">
+  <div class="card" id="upload-card">
+    <h2>Drop your files here:</h2>
+    <form id="form" action method="POST" enctype="multipart/form-data">
+      <img
+        style="border-color: gray; border-style: dashed"
+        class="max"
+        src="{{ url_for('static', filename='images/csh_tilted.png') }}"
+      />
+      <div>
+      <label for="game">Game Flatpak</label>
+      <input type="file" name="game" accept="*" />
+      <br>
+      <input class="btn btn-red" id="apply" value="Upload" type="submit" />
+    </div>
+    </form>
+  </div>
+  <div class="card">
+    <h2>How to Upload:</h2>
+    <ol>
+      <li>Navigate to the folder containing your Monogame game.</li>
+      <li>
+        Run <br /><code
+          >dotnet publish -c Release -r linux-x64 --self-contained</code
+        >
+      </li>
+      <li>Navigate to the newly created publish folder.</li>
+      <li>
+        In the folder <em>containing</em> your publish folder, run <br /><code
+          ><a href="https://github.com/ComputerScienceHouse/devcade-flatpakify"
+            >devcade-flatpakify</a
+            > {{ game.id }}</code></li>
+      <li>Upload the generated flatpak file here!</li>
+    </ol>
+  </div>
+</div>
+{% else %}
+<p id="description">
+  This shouldn't be possible. You're not authorized but you are logged in?
+  wacky.
+</p>
+{% endif %} {% endblock %}
