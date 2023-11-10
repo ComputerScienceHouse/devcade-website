@@ -160,7 +160,7 @@ label::after {
   justify-content: center;
   background:
     linear-gradient(rgba(0, 0, 0, 0) 50%, var(--bg) 100%),
-    repeat top/5.5em url('../images/csh_tilted.png');
+    repeat top/5.5em url('../static/images/csh_tilted.png');
 }
 
 .crate {
