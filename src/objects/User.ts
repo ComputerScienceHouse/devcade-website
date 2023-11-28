@@ -12,3 +12,5 @@ interface User {
     admin: boolean,
     email: string
 }
+
+export default User
