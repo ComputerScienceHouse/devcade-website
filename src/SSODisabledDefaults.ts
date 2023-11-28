@@ -1,5 +1,5 @@
 // if your app requires SSO you can delete this page
-import UserInfo from './UserInfo'
+import UserInfo from './objects/UserInfo'
 import { useOidc, useOidcAccessToken, useOidcIdToken } from '@axa-fr/react-oidc'
 import { SSOEnabled } from './configuration'
 

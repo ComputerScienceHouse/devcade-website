@@ -6,7 +6,7 @@ import {
 } from 'reactstrap'
 
 import React from 'react'
-import UserInfo from '../UserInfo'
+import UserInfo from '../objects/UserInfo'
 import { SSOEnabled } from '../configuration'
 import { getUseOidcAccessToken, getUseOidcHook, NoSSOProfilePicture, NoSSOUserInfo, useOidcAccessTokenNoSSO, useOidcNoSSO } from '../SSODisabledDefaults'
 

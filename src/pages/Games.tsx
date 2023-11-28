@@ -1,5 +1,5 @@
 import { useOidcAccessToken, useOidc, useOidcIdToken } from '@axa-fr/react-oidc'
-import UserInfo from '../UserInfo'
+import UserInfo from '../objects/UserInfo'
 
 const Games = () => {
     // important hooks

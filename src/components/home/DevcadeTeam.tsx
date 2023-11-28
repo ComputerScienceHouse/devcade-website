@@ -21,10 +21,7 @@ const DevcadeTeam: React.FunctionComponent = () => {
                 software, and some on the physical design of the cabinet itself -- there's something for everyone
                 on this project.
             </p>
-
-            {/* <div className="creditsbutton">
-                <p className="creditsbutton-text">Credits</p>
-            </div> */}
+            
             <CreditsButton />
         </div>
     )
