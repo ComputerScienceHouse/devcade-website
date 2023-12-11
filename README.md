@@ -56,7 +56,7 @@ Note that this is just a template for the `envs.py` file. You will need to get t
 
 It is recommended that when running locally, you run this project in a container using the provided `Dockerfile`.
 
-To do so using Podman](https://podman.io/), run the following commands from the root of the project directory:
+To do so using [Podman](https://podman.io/), run the following commands from the root of the project directory:
 
     1. `podman build -t <image name of your choice ,i.e. lontronix/devcade> .`
     2. `podman run -i -t -p 8080:8080 <the image name you specified in the previous command>`
