@@ -1,13 +1,6 @@
 # devcade-website
 Front-end for the Devcade website that allows members to view the game catalog and upload games.
 
-# How to Run
-`pip3 install -r requirements.txt`
-
-`cd src`
-
-`flask run`
-
 # Project Structure
 This project follows a standard template for a Flask project. Below is the basic file structure of the project, with every file described other than those in the `static/` folder (for brevity).
 
@@ -33,24 +26,49 @@ devcade-website
 ```
 
 # Local Development
-If you would like to run this project using your local machine, first create a `envs.py` file with the following structure:
+If you would like to run this project using your local machine, first create a `envs.py` file in `src/` with the following structure:
 
 ```
 import os
 
-os.environ['IP'] = ''
-os.environ['PORT'] = ''
-os.environ['SERVER_NAME'] = ''
-os.environ['PREFERRED_URL_SCHEME'] = ''
-os.environ["OIDC_ISSUER"] = ""
-os.environ["OIDC_CLIENT_ID"] = ""
+os.environ['SERVER_NAME'] = 'localhost:8080'
+os.environ['PREFERRED_URL_SCHEME'] = 'http'
+
+os.environ["POSTGRESQL_USER"] = ""
+os.environ["POSTGRESQL_PASSWORD"] = ""
+os.environ["POSTGRESQL_IP"] = ""
+
 os.environ["OIDC_CLIENT_SECRET"] = ""
+
 os.environ["GOOGLE_OIDC_ISSUER"] = ""
 os.environ["GOOGLE_OIDC_CLIENT_ID"] = ""
 os.environ["GOOGLE_OIDC_CLIENT_SECRET"] = ""
+
+os.environ["SECRET_KEY"]= ""
 os.environ["DEVCADE_API_URI"] = ""
 os.environ["FRONTEND_API_KEY"] = ""
-os.environ["DEVCADE_IS_DEV"] = ""
+os.environ["DEVCADE_IS_DEV"] = "" # "True" or "False"
 ```
 
 Note that this is just a template for the `envs.py` file. You will need to get these secrets from an RTP or Devcade developer.
+
+## Running in a Container (Recommended)
+
+It is recommended that when running locally, you run this project in a container using the provided `Dockerfile`.
+
+To do so using [Podman](https://podman.io/), run the following commands from the root of the project directory:
+
+    1. `podman build -t <image name of your choice ,i.e. lontronix/devcade> .`
+    2. `podman run -i -t -p 8080:8080 <the image name you specified in the previous command>`
+
+## Running without a container
+
+Run the following commands:
+
+`pip3 install -r requirements.txt`
+
+`cd src`
+
+`flask run`
+
+Note: Because most contributors test this project using a container, if you have difficulties getting this project setup locally *without* a container it is less likely you'll be able to get help.
