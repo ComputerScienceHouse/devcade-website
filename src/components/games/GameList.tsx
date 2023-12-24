@@ -4,7 +4,7 @@ import '../../css/games/gamelist.css';
 import '../../index.tsx.css';
 
 function getGameList() {
-    let gameList = axios.get(`https://devcade.csh.rit.edu/api/games/`);
+    let gameList = axios.get('https://devcade.csh.rit.edu/api/games/');
 }
 
 const GameList: React.FunctionComponent = () => {

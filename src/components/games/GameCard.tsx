@@ -3,7 +3,7 @@ import axios from "axios";
 import Game from "../../objects/Game";
 
 function getGameData(game: Game) {
-    axios.get(`https://devcade.csh.rit.edu/api/game/${game.id}`);
+    let data = axios.get(`https://devcade.csh.rit.edu/api/game/${game.id}/`);
 }
 const GameCard: React.FunctionComponent = () => {
     return (
