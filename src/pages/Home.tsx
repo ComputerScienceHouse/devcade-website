@@ -1,5 +1,3 @@
-import { useOidcAccessToken, useOidc, useOidcIdToken } from '@axa-fr/react-oidc'
-import UserInfo from '../objects/UserInfo'
 import HomeGrid from '../components/home/HomeGrid'
 
 const Home = () => {
