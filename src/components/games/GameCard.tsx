@@ -10,3 +10,4 @@ const GameCard: React.FunctionComponent = () => {
         <div></div>
     )
 }
+export default GameCard

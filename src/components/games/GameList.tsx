@@ -5,13 +5,17 @@ import '../../index.tsx.css';
 
 function getGameList() {
     let gameList = axios.get('https://devcade.csh.rit.edu/api/games/');
+    console.log(gameList);
 }
 
 const GameList: React.FunctionComponent = () => {
+    let res = getGameList();
+
     return (
+
         <div id="game-grid">
-            {/* Make class for a game card */}
-            {/* display a card for each game received from the api */}
         </div>
     )
 }
+
+export default GameList
