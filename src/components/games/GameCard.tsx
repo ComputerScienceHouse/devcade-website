@@ -1,13 +1,14 @@
 import React from "react";
-import axios from "axios";
 import Game from "../../objects/Game";
 
-function getGameData(game: Game) {
-    let data = axios.get(`https://devcade.csh.rit.edu/api/game/${game.id}/`);
-}
-const GameCard: React.FunctionComponent = () => {
+
+
+const GameCard = ({id, author, upload_date, name, hash, description, tags, user}: Game):JSX.Element => {
     return (
-        <div></div>
+        <div id={`game-${id}`}>
+            <h2>{`${name} - ${author}`}</h2>
+            <p>{description}</p>
+        </div>
     )
 }
 export default GameCard
