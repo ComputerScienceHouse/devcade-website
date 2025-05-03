@@ -1,0 +1,23 @@
+#game-grid {
+    background-color: var(--csh-tertiary);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: auto 5%;
+}
+
+.game-card {
+    background-color: darkred;
+    width: 44%;
+    margin: 1em auto;
+    padding-left: 1em;
+    border-radius: 15px;
+}
+
+.game-card h2 {
+    color: aliceblue;
+}
+
+.game-card p {
+    font-size: 12pt;
+}
